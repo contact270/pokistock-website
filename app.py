@@ -1,5 +1,11 @@
+import os
 import streamlit as st
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
+
+import modules.instagram as ig_module
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -28,7 +34,6 @@ st.markdown(
       .accent-firebase { border-top: 3px solid #FF6D00; }
       .accent-clarity  { border-top: 3px solid #00ADEF; }
       .accent-ig       { border-top: 3px solid #E1306C; }
-      .accent-stripe   { border-top: 3px solid #635BFF; opacity: .55; }
 
       .metric-value {
         font-size: 2rem;
@@ -82,7 +87,7 @@ st.markdown(
         text-align: center;
         margin-bottom: 16px;
       }
-      .pre-launch-banner p { color: #444; font-size: 0.82rem; margin: 0; }
+      .pre-launch-banner p  { color: #444; font-size: 0.82rem; margin: 0; }
       .pre-launch-banner h3 { color: #635BFF; font-size: 1.1rem; margin: 0 0 6px; }
 
       .jarvis-header { text-align: center; padding: 28px 0 24px; }
@@ -110,12 +115,15 @@ def card(css_class=""):
     return f'<div class="jarvis-card {css_class}">'
 
 def metric_html(label, value, delta="", delta_type="neu"):
+    display = f"{value:,}" if isinstance(value, int) else (
+        f"{value}%" if isinstance(value, float) else (value or "—")
+    )
     delta_html = (
         f'<span class="metric-delta-{delta_type}">{delta}</span>' if delta else ""
     )
     return (
         f'<div class="metric-label">{label}</div>'
-        f'<div class="metric-value">{value} {delta_html}</div>'
+        f'<div class="metric-value">{display} {delta_html}</div>'
     )
 
 def pill(text, style="grey"):
@@ -128,44 +136,44 @@ def col_heading(icon, title, subtitle=""):
     )
     return f'<div class="col-heading">{icon} {title}{sub}</div>'
 
-# ── Placeholder data — replace tuples with live API calls per module ──────────
-#
-#   Each entry: (display_value, delta_label, delta_type)
-#   delta_type: "pos" (green) | "neg" (red) | "neu" (grey)
-#
-#   Firebase module  →  connect via google-analytics-data Python SDK
-#   Clarity module   →  connect via Microsoft Clarity REST API
-#   Instagram module →  connect via Instagram Graph API
+# ── Firebase placeholder data (module coming next) ────────────────────────────
 
 FIREBASE = {
-    "new_users_today":  ("—",  "connect Firebase", "neu"),
-    "new_users_week":   ("—",  "connect Firebase", "neu"),
-    "dau":              ("—",  "connect Firebase", "neu"),
-    "mau":              ("—",  "connect Firebase", "neu"),
-    "session_dur":      ("—",  "connect Firebase", "neu"),
-    "retention_d1":     ("—",  "connect Firebase", "neu"),
-    "crash_free":       ("—",  "connect Firebase", "neu"),
-    "active_devices":   ("—",  "connect Firebase", "neu"),
+    "new_users_today": ("—", "", "neu"),
+    "new_users_week":  ("—", "", "neu"),
+    "dau":             ("—", "", "neu"),
+    "mau":             ("—", "", "neu"),
+    "session_dur":     ("—", "", "neu"),
+    "retention_d1":    ("—", "", "neu"),
+    "crash_free":      ("—", "", "neu"),
+    "active_devices":  ("—", "", "neu"),
 }
+
+# ── Clarity placeholder data (module coming next) ─────────────────────────────
 
 CLARITY = {
-    "total_sessions":   ("—",  "connect Clarity",  "neu"),
-    "pages_per_sess":   ("—",  "connect Clarity",  "neu"),
-    "scroll_depth":     ("—",  "connect Clarity",  "neu"),
-    "dead_clicks":      ("—",  "connect Clarity",  "neu"),
-    "rage_clicks":      ("—",  "connect Clarity",  "neu"),
-    "bounce_rate":      ("—",  "connect Clarity",  "neu"),
+    "total_sessions": ("—", "", "neu"),
+    "pages_per_sess": ("—", "", "neu"),
+    "scroll_depth":   ("—", "", "neu"),
+    "bounce_rate":    ("—", "", "neu"),
+    "dead_clicks":    ("—", "", "neu"),
+    "rage_clicks":    ("—", "", "neu"),
 }
 
-INSTAGRAM = {
-    "followers":        ("—",  "connect Instagram", "neu"),
-    "following":        ("—",  "connect Instagram", "neu"),
-    "posts":            ("—",  "connect Instagram", "neu"),
-    "reach_week":       ("—",  "connect Instagram", "neu"),
-    "impressions_week": ("—",  "connect Instagram", "neu"),
-    "engagement_rate":  ("—",  "connect Instagram", "neu"),
-    "profile_visits":   ("—",  "connect Instagram", "neu"),
-}
+# ── Live Instagram data ───────────────────────────────────────────────────────
+
+_ig = ig_module.get_all()
+_ig_live = ig_module.is_connected()
+
+def _ig_val(key, suffix=""):
+    v = _ig.get(key)
+    if v is None:
+        return "—", "", "neu"
+    if isinstance(v, float):
+        return f"{v}%", "", "neu"
+    if isinstance(v, int):
+        return f"{v:,}{suffix}", "", "neu"
+    return str(v), "", "neu"
 
 # ── Header ────────────────────────────────────────────────────────────────────
 
@@ -191,81 +199,68 @@ col_firebase, col_clarity, col_ig = st.columns(3, gap="large")
 with col_firebase:
     st.markdown(col_heading("🔥", "App Analytics", "Firebase"), unsafe_allow_html=True)
 
-    # New users today / this week
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(
             card("accent-firebase") +
             metric_html("New Users Today", *FIREBASE["new_users_today"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
     with c2:
         st.markdown(
             card("accent-firebase") +
             metric_html("New Users (7d)", *FIREBASE["new_users_week"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
 
-    # DAU / MAU
     c3, c4 = st.columns(2)
     with c3:
         st.markdown(
             card("accent-firebase") +
             metric_html("Daily Active Users", *FIREBASE["dau"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
     with c4:
         st.markdown(
             card("accent-firebase") +
             metric_html("Monthly Active Users", *FIREBASE["mau"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
 
-    # Session & Retention
     c5, c6 = st.columns(2)
     with c5:
         st.markdown(
             card("accent-firebase") +
             metric_html("Avg Session", *FIREBASE["session_dur"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
     with c6:
         st.markdown(
             card("accent-firebase") +
             metric_html("D1 Retention", *FIREBASE["retention_d1"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
 
-    # Crash-free / Active devices
     c7, c8 = st.columns(2)
     with c7:
         st.markdown(
             card("accent-firebase") +
             metric_html("Crash-Free", *FIREBASE["crash_free"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
     with c8:
         st.markdown(
             card("accent-firebase") +
             metric_html("Active Devices", *FIREBASE["active_devices"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
 
     st.markdown(
         card("accent-firebase") +
         '<div class="metric-label">Firebase Status</div>' +
         pill("Not connected", "orange") + "&nbsp;" +
-        pill("Google Analytics Data API", "grey") +
-        "</div>",
-        unsafe_allow_html=True,
+        pill("Module coming next", "grey") +
+        "</div>", unsafe_allow_html=True,
     )
 
 # ─────────────────────────────────────────
@@ -274,125 +269,106 @@ with col_firebase:
 with col_clarity:
     st.markdown(col_heading("🌐", "Website Analytics", "Microsoft Clarity"), unsafe_allow_html=True)
 
-    # Sessions / Pages per session
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(
             card("accent-clarity") +
             metric_html("Total Sessions", *CLARITY["total_sessions"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
     with c2:
         st.markdown(
             card("accent-clarity") +
             metric_html("Pages / Session", *CLARITY["pages_per_sess"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
 
-    # Scroll depth / Bounce
     c3, c4 = st.columns(2)
     with c3:
         st.markdown(
             card("accent-clarity") +
             metric_html("Avg Scroll Depth", *CLARITY["scroll_depth"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
     with c4:
         st.markdown(
             card("accent-clarity") +
             metric_html("Bounce Rate", *CLARITY["bounce_rate"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            "</div>", unsafe_allow_html=True,
         )
 
-    # UX friction signals
     st.markdown(
         card("accent-clarity") +
         '<div class="metric-label" style="margin-bottom:12px">UX Friction Signals</div>' +
         metric_html("Dead Clicks", *CLARITY["dead_clicks"]) +
         "<br>" +
         metric_html("Rage Clicks", *CLARITY["rage_clicks"]) +
-        "</div>",
-        unsafe_allow_html=True,
+        "</div>", unsafe_allow_html=True,
     )
 
     st.markdown(
         card("accent-clarity") +
         '<div class="metric-label">Clarity Status</div>' +
         pill("Not connected", "blue") + "&nbsp;" +
-        pill("Clarity REST API", "grey") +
-        "</div>",
-        unsafe_allow_html=True,
+        pill("Module coming next", "grey") +
+        "</div>", unsafe_allow_html=True,
     )
 
 # ─────────────────────────────────────────
 # COLUMN 3 — Marketing (Instagram)
-#            + Pre-launch Stripe slot
 # ─────────────────────────────────────────
 with col_ig:
     st.markdown(col_heading("📱", "Marketing", "Instagram"), unsafe_allow_html=True)
 
-    # Followers / Posts
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(
             card("accent-ig") +
-            metric_html("Followers", *INSTAGRAM["followers"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            metric_html("Followers", *_ig_val("followers")) +
+            "</div>", unsafe_allow_html=True,
         )
     with c2:
         st.markdown(
             card("accent-ig") +
-            metric_html("Posts", *INSTAGRAM["posts"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            metric_html("Posts", *_ig_val("posts")) +
+            "</div>", unsafe_allow_html=True,
         )
 
-    # Reach / Impressions this week
     c3, c4 = st.columns(2)
     with c3:
         st.markdown(
             card("accent-ig") +
-            metric_html("Reach (7d)", *INSTAGRAM["reach_week"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            metric_html("Reach (7d)", *_ig_val("reach_week")) +
+            "</div>", unsafe_allow_html=True,
         )
     with c4:
         st.markdown(
             card("accent-ig") +
-            metric_html("Impressions (7d)", *INSTAGRAM["impressions_week"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            metric_html("Impressions (7d)", *_ig_val("impressions_week")) +
+            "</div>", unsafe_allow_html=True,
         )
 
-    # Engagement / Profile visits
     c5, c6 = st.columns(2)
     with c5:
         st.markdown(
             card("accent-ig") +
-            metric_html("Engagement Rate", *INSTAGRAM["engagement_rate"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            metric_html("Engagement Rate", *_ig_val("engagement_rate")) +
+            "</div>", unsafe_allow_html=True,
         )
     with c6:
         st.markdown(
             card("accent-ig") +
-            metric_html("Profile Visits (7d)", *INSTAGRAM["profile_visits"]) +
-            "</div>",
-            unsafe_allow_html=True,
+            metric_html("Profile Visits (7d)", *_ig_val("profile_visits")) +
+            "</div>", unsafe_allow_html=True,
         )
 
+    ig_status_pill = pill("Live ✓", "green") if _ig_live else pill("Not connected", "pink")
     st.markdown(
         card("accent-ig") +
         '<div class="metric-label">Instagram Status</div>' +
-        pill("Not connected", "pink") + "&nbsp;" +
-        pill("Instagram Graph API", "grey") +
-        "</div>",
-        unsafe_allow_html=True,
+        ig_status_pill + "&nbsp;" +
+        pill("Instagram Graph API v20", "grey") +
+        "</div>", unsafe_allow_html=True,
     )
 
     # Pre-launch Stripe placeholder
@@ -409,8 +385,8 @@ with col_ig:
 st.markdown('<hr class="jarvis">', unsafe_allow_html=True)
 st.markdown(
     '<p style="text-align:center;color:#333;font-size:.75rem;letter-spacing:.05em">'
-    "J.A.R.V.I.S. v0.2.0 &nbsp;·&nbsp; "
-    "Connect Firebase · Clarity · Instagram to activate live metrics"
+    "J.A.R.V.I.S. v0.3.0 &nbsp;·&nbsp; "
+    "Instagram live · Firebase &amp; Clarity coming next"
     "</p>",
     unsafe_allow_html=True,
 )
