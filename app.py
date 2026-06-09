@@ -1,7 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
-# ── Page config ──────────────────────────────────────────────────────────────
+# ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="J.A.R.V.I.S. — PokiStock Command Centre",
     page_icon="🤖",
@@ -13,11 +13,9 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-      /* Dark base */
       [data-testid="stAppViewContainer"] { background: #0d0d0d; }
       [data-testid="stHeader"]           { background: transparent; }
 
-      /* Card wrapper */
       .jarvis-card {
         background: #141414;
         border: 1px solid #1f1f1f;
@@ -27,12 +25,11 @@ st.markdown(
       }
       .jarvis-card:hover { border-color: #3a3a3a; transition: border-color .2s; }
 
-      /* Column accent bars */
       .accent-firebase { border-top: 3px solid #FF6D00; }
-      .accent-stripe   { border-top: 3px solid #635BFF; }
-      .accent-webdev   { border-top: 3px solid #00C896; }
+      .accent-clarity  { border-top: 3px solid #00ADEF; }
+      .accent-ig       { border-top: 3px solid #E1306C; }
+      .accent-stripe   { border-top: 3px solid #635BFF; opacity: .55; }
 
-      /* Metric typography */
       .metric-value {
         font-size: 2rem;
         font-weight: 700;
@@ -50,7 +47,6 @@ st.markdown(
       .metric-delta-neg { color: #FF4C60; font-size: 0.82rem; }
       .metric-delta-neu { color: #888;    font-size: 0.82rem; }
 
-      /* Section heading */
       .col-heading {
         font-size: 1rem;
         font-weight: 600;
@@ -63,7 +59,6 @@ st.markdown(
         gap: 8px;
       }
 
-      /* Status pill */
       .pill {
         display: inline-block;
         padding: 2px 10px;
@@ -74,32 +69,35 @@ st.markdown(
       }
       .pill-green  { background:#0a2e22; color:#00C896; }
       .pill-orange { background:#2e1a00; color:#FF6D00; }
+      .pill-blue   { background:#001a2e; color:#00ADEF; }
+      .pill-pink   { background:#2e0014; color:#E1306C; }
       .pill-purple { background:#1a1833; color:#635BFF; }
-      .pill-red    { background:#2e0a0a; color:#FF4C60; }
-      .pill-grey   { background:#1f1f1f; color:#888; }
+      .pill-grey   { background:#1f1f1f; color:#555;    }
 
-      /* Master header */
-      .jarvis-header {
+      .pre-launch-banner {
+        background: #111;
+        border: 1px dashed #2a2a2a;
+        border-radius: 12px;
+        padding: 28px 22px;
         text-align: center;
-        padding: 28px 0 24px;
+        margin-bottom: 16px;
       }
+      .pre-launch-banner p { color: #444; font-size: 0.82rem; margin: 0; }
+      .pre-launch-banner h3 { color: #635BFF; font-size: 1.1rem; margin: 0 0 6px; }
+
+      .jarvis-header { text-align: center; padding: 28px 0 24px; }
       .jarvis-header h1 {
         font-size: 2.4rem;
         font-weight: 800;
         letter-spacing: .15em;
-        background: linear-gradient(90deg, #FF6D00, #635BFF, #00C896);
+        background: linear-gradient(90deg, #FF6D00, #E1306C, #00ADEF);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0;
       }
       .jarvis-header p {
-        color: #555;
-        font-size: 0.85rem;
-        margin-top: 6px;
-        letter-spacing: .06em;
+        color: #555; font-size: 0.85rem; margin-top: 6px; letter-spacing: .06em;
       }
-
-      /* Divider */
       hr.jarvis { border: none; border-top: 1px solid #1a1a1a; margin: 8px 0 20px; }
     </style>
     """,
@@ -108,52 +106,65 @@ st.markdown(
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def card(css_class: str = "", key: str = ""):
-    """Return an HTML card open tag with optional accent class."""
+def card(css_class=""):
     return f'<div class="jarvis-card {css_class}">'
 
-def metric_html(label: str, value: str, delta: str = "", delta_type: str = "neu") -> str:
-    delta_class = f"metric-delta-{delta_type}"
-    delta_html  = f'<span class="{delta_class}">{delta}</span>' if delta else ""
+def metric_html(label, value, delta="", delta_type="neu"):
+    delta_html = (
+        f'<span class="metric-delta-{delta_type}">{delta}</span>' if delta else ""
+    )
     return (
         f'<div class="metric-label">{label}</div>'
         f'<div class="metric-value">{value} {delta_html}</div>'
     )
 
-def pill(text: str, style: str = "grey") -> str:
+def pill(text, style="grey"):
     return f'<span class="pill pill-{style}">{text}</span>'
 
-def col_heading(icon: str, title: str, subtitle: str = "") -> str:
-    sub = f'<span style="color:#555;font-size:.75rem;margin-left:auto">{subtitle}</span>' if subtitle else ""
+def col_heading(icon, title, subtitle=""):
+    sub = (
+        f'<span style="color:#555;font-size:.75rem;margin-left:auto">{subtitle}</span>'
+        if subtitle else ""
+    )
     return f'<div class="col-heading">{icon} {title}{sub}</div>'
 
-# ── Placeholder data (swap for live API calls per module) ─────────────────────
+# ── Placeholder data — replace tuples with live API calls per module ──────────
+#
+#   Each entry: (display_value, delta_label, delta_type)
+#   delta_type: "pos" (green) | "neg" (red) | "neu" (grey)
+#
+#   Firebase module  →  connect via google-analytics-data Python SDK
+#   Clarity module   →  connect via Microsoft Clarity REST API
+#   Instagram module →  connect via Instagram Graph API
 
-FIREBASE_DATA = {
-    "dau":             ("8,241",  "+12% vs last week",  "pos"),
-    "mau":             ("61,034", "+5.2% vs last month", "pos"),
-    "session_dur":     ("3m 42s", "−8s vs last week",   "neg"),
-    "retention_d1":    ("42%",    "+3pp",                "pos"),
-    "crash_free":      ("99.2%",  "−0.1pp",              "neg"),
-    "active_devices":  ("12,490", "",                    "neu"),
+FIREBASE = {
+    "new_users_today":  ("—",  "connect Firebase", "neu"),
+    "new_users_week":   ("—",  "connect Firebase", "neu"),
+    "dau":              ("—",  "connect Firebase", "neu"),
+    "mau":              ("—",  "connect Firebase", "neu"),
+    "session_dur":      ("—",  "connect Firebase", "neu"),
+    "retention_d1":     ("—",  "connect Firebase", "neu"),
+    "crash_free":       ("—",  "connect Firebase", "neu"),
+    "active_devices":   ("—",  "connect Firebase", "neu"),
 }
 
-STRIPE_DATA = {
-    "mrr":             ("£4,820",  "+£340 MoM",   "pos"),
-    "arr":             ("£57,840", "",             "neu"),
-    "new_subs":        ("83",      "+11 vs prev",  "pos"),
-    "churn":           ("2.4%",    "−0.3pp",       "pos"),
-    "ltv":             ("£148",    "",             "neu"),
-    "pending_payouts": ("£1,204",  "",             "neu"),
+CLARITY = {
+    "total_sessions":   ("—",  "connect Clarity",  "neu"),
+    "pages_per_sess":   ("—",  "connect Clarity",  "neu"),
+    "scroll_depth":     ("—",  "connect Clarity",  "neu"),
+    "dead_clicks":      ("—",  "connect Clarity",  "neu"),
+    "rage_clicks":      ("—",  "connect Clarity",  "neu"),
+    "bounce_rate":      ("—",  "connect Clarity",  "neu"),
 }
 
-CLARITY_GITHUB_DATA = {
-    "dead_clicks":     ("3.1%",   "−0.4pp",        "pos"),
-    "rage_clicks":     ("0.8%",   "+0.2pp",         "neg"),
-    "scroll_depth":    ("68%",    "+5pp",            "pos"),
-    "open_issues":     ("14",     "+2 today",        "neg"),
-    "open_prs":        ("3",      "",                "neu"),
-    "ci_pass_rate":    ("94%",    "−2pp",            "neg"),
+INSTAGRAM = {
+    "followers":        ("—",  "connect Instagram", "neu"),
+    "following":        ("—",  "connect Instagram", "neu"),
+    "posts":            ("—",  "connect Instagram", "neu"),
+    "reach_week":       ("—",  "connect Instagram", "neu"),
+    "impressions_week": ("—",  "connect Instagram", "neu"),
+    "engagement_rate":  ("—",  "connect Instagram", "neu"),
+    "profile_visits":   ("—",  "connect Instagram", "neu"),
 }
 
 # ── Header ────────────────────────────────────────────────────────────────────
@@ -168,197 +179,228 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 st.markdown('<hr class="jarvis">', unsafe_allow_html=True)
 
 # ── 3-Column layout ───────────────────────────────────────────────────────────
 
-col_firebase, col_stripe, col_webdev = st.columns(3, gap="large")
+col_firebase, col_clarity, col_ig = st.columns(3, gap="large")
 
-# ────────────────────────────────────
-# COLUMN 1 — App Performance (Firebase)
-# ────────────────────────────────────
+# ─────────────────────────────────────────
+# COLUMN 1 — App Analytics (Firebase)
+# ─────────────────────────────────────────
 with col_firebase:
-    st.markdown(col_heading("🔥", "App Performance", "Firebase"), unsafe_allow_html=True)
+    st.markdown(col_heading("🔥", "App Analytics", "Firebase"), unsafe_allow_html=True)
 
-    # DAU / MAU
-    st.markdown(
-        card("accent-firebase") +
-        metric_html("Daily Active Users", *FIREBASE_DATA["dau"]) +
-        "</div>",
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        card("accent-firebase") +
-        metric_html("Monthly Active Users", *FIREBASE_DATA["mau"]) +
-        "</div>",
-        unsafe_allow_html=True,
-    )
-
-    # Session & Retention side-by-side
+    # New users today / this week
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(
             card("accent-firebase") +
-            metric_html("Avg Session", *FIREBASE_DATA["session_dur"]) +
+            metric_html("New Users Today", *FIREBASE["new_users_today"]) +
             "</div>",
             unsafe_allow_html=True,
         )
     with c2:
         st.markdown(
             card("accent-firebase") +
-            metric_html("D1 Retention", *FIREBASE_DATA["retention_d1"]) +
+            metric_html("New Users (7d)", *FIREBASE["new_users_week"]) +
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
+    # DAU / MAU
+    c3, c4 = st.columns(2)
+    with c3:
+        st.markdown(
+            card("accent-firebase") +
+            metric_html("Daily Active Users", *FIREBASE["dau"]) +
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c4:
+        st.markdown(
+            card("accent-firebase") +
+            metric_html("Monthly Active Users", *FIREBASE["mau"]) +
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
+    # Session & Retention
+    c5, c6 = st.columns(2)
+    with c5:
+        st.markdown(
+            card("accent-firebase") +
+            metric_html("Avg Session", *FIREBASE["session_dur"]) +
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c6:
+        st.markdown(
+            card("accent-firebase") +
+            metric_html("D1 Retention", *FIREBASE["retention_d1"]) +
             "</div>",
             unsafe_allow_html=True,
         )
 
     # Crash-free / Active devices
-    c3, c4 = st.columns(2)
-    with c3:
+    c7, c8 = st.columns(2)
+    with c7:
         st.markdown(
             card("accent-firebase") +
-            metric_html("Crash-Free", *FIREBASE_DATA["crash_free"]) +
+            metric_html("Crash-Free", *FIREBASE["crash_free"]) +
             "</div>",
             unsafe_allow_html=True,
         )
-    with c4:
+    with c8:
         st.markdown(
             card("accent-firebase") +
-            metric_html("Active Devices", *FIREBASE_DATA["active_devices"]) +
+            metric_html("Active Devices", *FIREBASE["active_devices"]) +
             "</div>",
             unsafe_allow_html=True,
         )
 
-    # Status banner
     st.markdown(
         card("accent-firebase") +
-        '<div class="metric-label">Service Health</div>' +
-        pill("Firestore OK", "green") + "&nbsp;" +
-        pill("Auth OK", "green") + "&nbsp;" +
-        pill("Storage OK", "green") +
+        '<div class="metric-label">Firebase Status</div>' +
+        pill("Not connected", "orange") + "&nbsp;" +
+        pill("Google Analytics Data API", "grey") +
         "</div>",
         unsafe_allow_html=True,
     )
 
-# ────────────────────────────────────
-# COLUMN 2 — Financials (Stripe)
-# ────────────────────────────────────
-with col_stripe:
-    st.markdown(col_heading("💳", "Financials", "Stripe"), unsafe_allow_html=True)
+# ─────────────────────────────────────────
+# COLUMN 2 — Website Analytics (Clarity)
+# ─────────────────────────────────────────
+with col_clarity:
+    st.markdown(col_heading("🌐", "Website Analytics", "Microsoft Clarity"), unsafe_allow_html=True)
 
-    # MRR
-    st.markdown(
-        card("accent-stripe") +
-        metric_html("Monthly Recurring Revenue", *STRIPE_DATA["mrr"]) +
-        "</div>",
-        unsafe_allow_html=True,
-    )
-
-    # ARR
-    st.markdown(
-        card("accent-stripe") +
-        metric_html("Annual Run Rate", *STRIPE_DATA["arr"]) +
-        "</div>",
-        unsafe_allow_html=True,
-    )
-
-    # New subs / Churn
+    # Sessions / Pages per session
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(
-            card("accent-stripe") +
-            metric_html("New Subs", *STRIPE_DATA["new_subs"]) +
+            card("accent-clarity") +
+            metric_html("Total Sessions", *CLARITY["total_sessions"]) +
             "</div>",
             unsafe_allow_html=True,
         )
     with c2:
         st.markdown(
-            card("accent-stripe") +
-            metric_html("Churn Rate", *STRIPE_DATA["churn"]) +
+            card("accent-clarity") +
+            metric_html("Pages / Session", *CLARITY["pages_per_sess"]) +
             "</div>",
             unsafe_allow_html=True,
         )
 
-    # LTV / Pending
+    # Scroll depth / Bounce
     c3, c4 = st.columns(2)
     with c3:
         st.markdown(
-            card("accent-stripe") +
-            metric_html("Avg LTV", *STRIPE_DATA["ltv"]) +
+            card("accent-clarity") +
+            metric_html("Avg Scroll Depth", *CLARITY["scroll_depth"]) +
             "</div>",
             unsafe_allow_html=True,
         )
     with c4:
         st.markdown(
-            card("accent-stripe") +
-            metric_html("Pending Payout", *STRIPE_DATA["pending_payouts"]) +
+            card("accent-clarity") +
+            metric_html("Bounce Rate", *CLARITY["bounce_rate"]) +
             "</div>",
             unsafe_allow_html=True,
         )
 
-    # Payment status
+    # UX friction signals
     st.markdown(
-        card("accent-stripe") +
-        '<div class="metric-label">Payment Gateway</div>' +
-        pill("Live Mode", "purple") + "&nbsp;" +
-        pill("Webhooks OK", "green") + "&nbsp;" +
-        pill("No Disputes", "green") +
+        card("accent-clarity") +
+        '<div class="metric-label" style="margin-bottom:12px">UX Friction Signals</div>' +
+        metric_html("Dead Clicks", *CLARITY["dead_clicks"]) +
+        "<br>" +
+        metric_html("Rage Clicks", *CLARITY["rage_clicks"]) +
         "</div>",
         unsafe_allow_html=True,
     )
 
-# ────────────────────────────────────
-# COLUMN 3 — Web / Dev (Clarity + GitHub)
-# ────────────────────────────────────
-with col_webdev:
-    st.markdown(col_heading("🌐", "Web / Dev", "Clarity · GitHub"), unsafe_allow_html=True)
-
-    # Clarity UX signals
     st.markdown(
-        card("accent-webdev") +
-        '<div class="metric-label" style="margin-bottom:12px">UX Signals — Microsoft Clarity</div>' +
-        metric_html("Dead Clicks", *CLARITY_GITHUB_DATA["dead_clicks"]) +
-        "<br>" +
-        metric_html("Rage Clicks", *CLARITY_GITHUB_DATA["rage_clicks"]) +
-        "<br>" +
-        metric_html("Avg Scroll Depth", *CLARITY_GITHUB_DATA["scroll_depth"]) +
+        card("accent-clarity") +
+        '<div class="metric-label">Clarity Status</div>' +
+        pill("Not connected", "blue") + "&nbsp;" +
+        pill("Clarity REST API", "grey") +
         "</div>",
         unsafe_allow_html=True,
     )
 
-    # GitHub health
+# ─────────────────────────────────────────
+# COLUMN 3 — Marketing (Instagram)
+#            + Pre-launch Stripe slot
+# ─────────────────────────────────────────
+with col_ig:
+    st.markdown(col_heading("📱", "Marketing", "Instagram"), unsafe_allow_html=True)
+
+    # Followers / Posts
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(
-            card("accent-webdev") +
-            metric_html("Open Issues", *CLARITY_GITHUB_DATA["open_issues"]) +
+            card("accent-ig") +
+            metric_html("Followers", *INSTAGRAM["followers"]) +
             "</div>",
             unsafe_allow_html=True,
         )
     with c2:
         st.markdown(
-            card("accent-webdev") +
-            metric_html("Open PRs", *CLARITY_GITHUB_DATA["open_prs"]) +
+            card("accent-ig") +
+            metric_html("Posts", *INSTAGRAM["posts"]) +
             "</div>",
             unsafe_allow_html=True,
         )
 
-    # CI pass rate
+    # Reach / Impressions this week
+    c3, c4 = st.columns(2)
+    with c3:
+        st.markdown(
+            card("accent-ig") +
+            metric_html("Reach (7d)", *INSTAGRAM["reach_week"]) +
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c4:
+        st.markdown(
+            card("accent-ig") +
+            metric_html("Impressions (7d)", *INSTAGRAM["impressions_week"]) +
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
+    # Engagement / Profile visits
+    c5, c6 = st.columns(2)
+    with c5:
+        st.markdown(
+            card("accent-ig") +
+            metric_html("Engagement Rate", *INSTAGRAM["engagement_rate"]) +
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c6:
+        st.markdown(
+            card("accent-ig") +
+            metric_html("Profile Visits (7d)", *INSTAGRAM["profile_visits"]) +
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
     st.markdown(
-        card("accent-webdev") +
-        metric_html("CI Pass Rate", *CLARITY_GITHUB_DATA["ci_pass_rate"]) +
+        card("accent-ig") +
+        '<div class="metric-label">Instagram Status</div>' +
+        pill("Not connected", "pink") + "&nbsp;" +
+        pill("Instagram Graph API", "grey") +
         "</div>",
         unsafe_allow_html=True,
     )
 
-    # Repo status
+    # Pre-launch Stripe placeholder
     st.markdown(
-        card("accent-webdev") +
-        '<div class="metric-label">Repository Status</div>' +
-        pill("main ✓ protected", "green") + "&nbsp;" +
-        pill("3 open PRs", "orange") + "&nbsp;" +
-        pill("CI passing", "green") +
-        "</div>",
+        '<div class="pre-launch-banner">'
+        '<h3>💳 Stripe — Pre-launch</h3>'
+        '<p>Revenue metrics will appear here once<br>monetisation is activated.</p>'
+        '</div>',
         unsafe_allow_html=True,
     )
 
@@ -367,8 +409,8 @@ with col_webdev:
 st.markdown('<hr class="jarvis">', unsafe_allow_html=True)
 st.markdown(
     '<p style="text-align:center;color:#333;font-size:.75rem;letter-spacing:.05em">'
-    "J.A.R.V.I.S. v0.1.0 &nbsp;·&nbsp; All metrics are placeholder data — "
-    "connect live API keys to activate each module"
+    "J.A.R.V.I.S. v0.2.0 &nbsp;·&nbsp; "
+    "Connect Firebase · Clarity · Instagram to activate live metrics"
     "</p>",
     unsafe_allow_html=True,
 )
