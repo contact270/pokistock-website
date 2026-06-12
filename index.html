@@ -680,12 +680,75 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .cn-card-right{display:none;}
 }
 
+
+/* ═══ VISUAL POLISH ═══ */
+::selection{background:rgba(0,200,255,.3);color:#fff;}
+section{scroll-margin-top:64px;}
+
+/* Scroll progress bar */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--yellow),var(--cyan));z-index:10001;box-shadow:0 0 12px rgba(0,200,255,.7);pointer-events:none;}
+
+/* Nav scrolled state + active link */
+nav{transition:background .35s ease,box-shadow .35s ease;}
+nav.scrolled{background:rgba(2,2,8,.94);box-shadow:0 8px 30px rgba(0,0,0,.55);}
+.nav-links a.active{color:var(--yellow);text-shadow:0 0 10px rgba(0,200,255,.6);}
+
+/* Hamburger */
+#nav-burger{display:none;background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.3);width:40px;height:34px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;margin-left:12px;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);flex-shrink:0;}
+#nav-burger span{display:block;width:16px;height:2px;background:var(--yellow);box-shadow:0 0 6px rgba(0,200,255,.6);transition:transform .3s,opacity .3s;}
+#nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+#nav-burger.open span:nth-child(2){opacity:0;}
+#nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile menu overlay */
+#mobile-menu{position:fixed;inset:0;z-index:999;background:rgba(2,2,8,.96);backdrop-filter:blur(16px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;opacity:0;pointer-events:none;transition:opacity .35s ease;}
+#mobile-menu::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,45,138,.04) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;}
+#mobile-menu.open{opacity:1;pointer-events:auto;}
+#mobile-menu a{font-family:var(--font-mono);font-size:12px;color:var(--muted2);text-decoration:none;letter-spacing:5px;text-transform:uppercase;padding:11px 0;position:relative;z-index:1;opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease,color .2s;}
+#mobile-menu.open a{opacity:1;transform:none;}
+#mobile-menu a:nth-child(1){transition-delay:.05s;}#mobile-menu a:nth-child(2){transition-delay:.09s;}#mobile-menu a:nth-child(3){transition-delay:.13s;}#mobile-menu a:nth-child(4){transition-delay:.17s;}#mobile-menu a:nth-child(5){transition-delay:.21s;}#mobile-menu a:nth-child(6){transition-delay:.25s;}#mobile-menu a:nth-child(7){transition-delay:.29s;}#mobile-menu a:nth-child(8){transition-delay:.33s;}#mobile-menu a:nth-child(9){transition-delay:.37s;}#mobile-menu a:nth-child(10){transition-delay:.41s;}#mobile-menu a:nth-child(11){transition-delay:.45s;}
+#mobile-menu a:hover{color:var(--yellow);}
+#mobile-menu .mm-cta{color:var(--void);background:linear-gradient(90deg,#FFC200,#FFE000);padding:12px 32px;font-weight:700;margin-top:16px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);box-shadow:0 0 24px rgba(0,200,255,.4);}
+@media(max-width:900px){#nav-burger{display:flex;}}
+
+/* Back to top */
+#to-top{position:fixed;bottom:22px;right:22px;z-index:7998;width:42px;height:42px;background:rgba(5,5,15,.92);border:1px solid rgba(0,200,255,.35);color:var(--yellow);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s,transform .35s,border-color .25s,box-shadow .25s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+#to-top.show{opacity:1;transform:none;pointer-events:auto;}
+#to-top:hover{border-color:var(--yellow);box-shadow:0 0 22px rgba(0,200,255,.35);}
+#to-top svg{width:16px;height:16px;}
+
+/* Card hover lift */
+.show-card,.cn-card,.pr-card{transition:transform .3s ease,border-color .3s,background .3s,box-shadow .3s;}
+.rv-card{transition:transform .3s ease,border-color .3s,box-shadow .3s;}
+.pr-tool,.store-btn{transition:transform .3s ease,background .3s,border-color .3s,color .3s,box-shadow .3s;}
+.show-card:hover,.rv-card:hover,.cn-card:hover,.pr-card:hover{transform:translateY(-4px);}
+.pr-tool:hover,.store-btn:hover{transform:translateY(-3px);}
+
+/* Hero STOCK breathing glow */
+.h-stock{animation:stockGlow 4.5s ease-in-out infinite;}
+@keyframes stockGlow{0%,100%{text-shadow:0 0 40px rgba(0,200,255,.4),0 0 80px rgba(0,200,255,.15);}50%{text-shadow:0 0 55px rgba(0,200,255,.65),0 0 110px rgba(0,200,255,.28);}}
+
+/* Mobile overflow fix - pr-cards forced page wider than viewport */
+@media(max-width:900px){
+  .pr-card,.pr-card-info,.pr-src{min-width:0;}
+  .pr-card-name,.pr-card-set{overflow-wrap:anywhere;}
+  .pr-src{padding:8px 4px;letter-spacing:.5px;}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+  html{scroll-behavior:auto;}
+  .shows-track,.rv-track,.cn-track{animation:none;}
+}
 </style>
 </head>
 <body>
 <canvas id="matrix"></canvas>
 <div id="cd"></div>
 <div id="cr"></div>
+<div id="scroll-progress"></div>
+<button id="to-top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <!-- A2HS -->
 <div id="a2hs">
@@ -715,7 +778,23 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     <li><a href="#prices">Prices</a></li>
   </ul>
   <a href="#download" class="nav-cta">Get The App</a>
+  <button id="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <a href="#about">Platform</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#features">Features</a>
+  <a href="#phases">Roadmap</a>
+  <a href="#featured-show">Featured</a>
+  <a href="#live-data">Live Feed</a>
+  <a href="#ssint-partner">Grading</a>
+  <a href="#community-news">News</a>
+  <a href="#shows">Shows</a>
+  <a href="#prices">Prices</a>
+  <a href="#download" class="mm-cta">Get The App</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -734,7 +813,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <span class="h-name"><span class="h-poki"><span class="gw" data-t="POKI">POKI</span></span><span class="h-stock"><span class="gw" data-t="STOCK">STOCK</span></span></span>
     </h1>
     <div class="h-tagline">"Powered by the Community. Built for the future of TCG."</div>
-    <p class="h-sub"><strong>UK's Premier</strong> TCG Community Hub.<br>Discover Vendors, Expand your Collection, Grow your Buisness, Explore Card Shows, Compare prices.</p>
+    <p class="h-sub"><strong>UK's Premier</strong> TCG Community Hub.<br>Discover Vendors, Expand your Collection, Grow your Business, Explore Card Shows, Compare prices.</p>
     <div class="h-actions">
       <a href="https://apps.apple.com/gb/app/pokistock/id6761550974" target="_blank" class="btn-yellow"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
       <a href="https://play.google.com/store/apps/details?id=co.pixelbeard.pokistock" target="_blank" class="btn-cyan"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.22.99.14l12.44-7.18-2.69-2.7-10.74 9.74zm-1.8-20.4c-.07.2-.1.43-.1.67v19.94c0 .24.03.47.1.67l.07.06 11.15-11.15v-.26L1.45 3.3l-.07.06zM20.06 10.5l-2.88-1.66-3.02 3.02 3.02 3.02 2.9-1.67c.83-.48.83-1.25-.02-1.71zm-17.7 13.4l12.44-7.18-2.69-2.69-9.75 9.87z"/></svg>Google Play</a>
@@ -743,7 +822,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     <div class="h-stats">
       <div class="hst"><div class="hst-v">UK<span>'s</span></div><div class="hst-l">FIRST TCG PLATFORM</div></div>
       <div class="hst"><div class="hst-v">iOS <span>&</span> APK</div><div class="hst-l">AVAILABLE NOW</div></div>
-      <div class="hst"><div class="hst-v">DROPPING <span>SOON</span></div><div class="hst-l">IN APP PURCAHSES</div></div>
+      <div class="hst"><div class="hst-v">DROPPING <span>SOON</span></div><div class="hst-l">IN-APP PURCHASES</div></div>
       <div class="hst"><div class="hst-v">100<span>%</span></div><div class="hst-l">COMMUNITY FIRST</div></div>
     </div>
   </div>
@@ -1205,6 +1284,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         </div>
       </div>
     </div>
+  </div>
   <div class="live-panel" id="panel-new">
     <div class="vendor-grid" id="new-vendors">
       <div class="vendor-card">
@@ -1265,6 +1345,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         </div>
       </div>
     </div>
+  </div>
   <div class="live-panel" id="panel-stock">
     <div class="stock-feed">
       <div class="stock-item"><div class="si-rank">01</div><div><div class="si-name">Charizard ex SAR Hyper Rare</div><div class="si-meta">Prismatic Evolutions · PSA 10</div><div class="si-vendor">by PokeKingdom UK</div></div><div class="si-price">£340</div><div class="si-time">2 MIN AGO<br><span style="color:var(--green)">●</span> LIVE</div></div>
@@ -1480,6 +1561,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <a href="https://instagram.com/pokistockappuk" target="_blank" class="cn-btn" style="border-color:rgba(255,45,138,.3);color:var(--cyan)">Get In Touch →</a>
         </div>
       </div>
+    </div>
   </div>
 </section>
 <div class="divider"></div>
@@ -2452,6 +2534,53 @@ if (isIOS && !isStandalone && !dismissed) {
 function switchTab(name,btn){document.querySelectorAll('.ltab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.live-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('panel-'+name).classList.add('active');}
 
 // Price tracker now links out to live sources - no JS needed
+
+// SCROLL FX - progress bar, nav state, back-to-top
+const progEl=document.getElementById('scroll-progress');
+const navEl=document.querySelector('nav');
+const toTopEl=document.getElementById('to-top');
+function onScrollFX(){
+  const st=window.scrollY;
+  const max=document.documentElement.scrollHeight-window.innerHeight;
+  if(progEl)progEl.style.width=(max>0?(st/max)*100:0)+'%';
+  if(navEl)navEl.classList.toggle('scrolled',st>40);
+  if(toTopEl)toTopEl.classList.toggle('show',st>600);
+}
+window.addEventListener('scroll',onScrollFX,{passive:true});
+onScrollFX();
+if(toTopEl)toTopEl.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// SCROLLSPY - highlight nav link for section in view
+const spyLinks=[...document.querySelectorAll('.nav-links a[href^="#"]')];
+const spyMap=new Map();
+spyLinks.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));if(s)spyMap.set(s,a);});
+const spyObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      spyLinks.forEach(l=>l.classList.remove('active'));
+      const l=spyMap.get(e.target);
+      if(l)l.classList.add('active');
+    }
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+spyMap.forEach((_,sec)=>spyObs.observe(sec));
+
+// MOBILE MENU
+const burger=document.getElementById('nav-burger');
+const mMenu=document.getElementById('mobile-menu');
+if(burger&&mMenu){
+  burger.addEventListener('click',()=>{
+    const open=mMenu.classList.toggle('open');
+    burger.classList.toggle('open',open);
+    burger.setAttribute('aria-label',open?'Close menu':'Open menu');
+    document.body.style.overflow=open?'hidden':'';
+  });
+  mMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    mMenu.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow='';
+  }));
+}
 </script>
 </body>
 </html>
