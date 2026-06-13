@@ -777,6 +777,24 @@ section{scroll-margin-top:96px;}
 #features::after{content:'';position:absolute;top:-120px;right:-120px;width:560px;height:560px;background:radial-gradient(circle,rgba(255,45,138,.05),transparent 65%);pointer-events:none;}
 #prices::after{content:'';position:absolute;bottom:-120px;left:-120px;width:560px;height:560px;background:radial-gradient(circle,rgba(0,200,255,.05),transparent 65%);pointer-events:none;}
 
+/* ═══ ROUND 3 - ADVANCED FX ═══ */
+/* Hide developer-facing notes */
+.api-box,.api-note,.demo-note{display:none!important;}
+
+/* Cursor spotlight - glow follows mouse across cards */
+.spot{--mx:50%;--my:50%;}
+@media(pointer:fine){
+  .spot:hover{background-image:radial-gradient(240px circle at var(--mx) var(--my),rgba(0,200,255,.10),transparent 65%);}
+}
+
+/* Hero 3D tilt + grid parallax */
+.hero-float{transition:transform .2s ease-out;will-change:transform;}
+.hgrid{transition:transform .25s ease-out;will-change:transform;}
+.hero-inner{will-change:transform,opacity;}
+
+/* Typewriter caret */
+.type-caret{display:inline-block;color:var(--yellow);text-shadow:0 0 8px rgba(0,200,255,.6);animation:blk 1s step-end infinite;-webkit-text-stroke:0;}
+
 /* Mobile overflow fix - pr-cards forced page wider than viewport */
 @media(max-width:900px){
   .pr-card,.pr-card-info,.pr-src{min-width:0;}
@@ -2637,6 +2655,91 @@ const spyObs=new IntersectionObserver(es=>{
   });
 },{rootMargin:'-30% 0px -60% 0px'});
 spyMap.forEach((_,sec)=>spyObs.observe(sec));
+
+// ===== ADVANCED FX =====
+const finePointer=window.matchMedia('(pointer:fine)').matches;
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Cursor spotlight on cards
+if(finePointer){
+  document.querySelectorAll('.feat-card,.vendor-card,.pr-card,.rv-card,.cn-card,.show-card,.price-row,.stock-item,.sv-row,.pr-tool').forEach(c=>{
+    c.classList.add('spot');
+    c.addEventListener('mousemove',e=>{
+      const r=c.getBoundingClientRect();
+      c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      c.style.setProperty('--my',(e.clientY-r.top)+'px');
+    });
+  });
+}
+
+// Hero 3D tilt on the floating logo + grid parallax
+const heroSec=document.getElementById('hero');
+const heroFloat=document.querySelector('.hero-float');
+const heroGrid=document.querySelector('.hgrid');
+if(finePointer&&!reduceMotion&&heroSec){
+  heroSec.addEventListener('mousemove',e=>{
+    const r=heroSec.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    if(heroFloat)heroFloat.style.transform='perspective(700px) rotateY('+(x*10).toFixed(2)+'deg) rotateX('+(-y*10).toFixed(2)+'deg)';
+    if(heroGrid)heroGrid.style.transform='translate('+(-x*18).toFixed(1)+'px,'+(-y*18).toFixed(1)+'px)';
+  });
+  heroSec.addEventListener('mouseleave',()=>{
+    if(heroFloat)heroFloat.style.transform='';
+    if(heroGrid)heroGrid.style.transform='';
+  });
+}
+
+// Magnetic CTA buttons
+if(finePointer&&!reduceMotion){
+  document.querySelectorAll('.btn-yellow,.btn-cyan,.btn-ghost,.nav-cta').forEach(b=>{
+    b.addEventListener('mousemove',e=>{
+      const r=b.getBoundingClientRect();
+      b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.16).toFixed(1)+'px,'+((e.clientY-r.top-r.height/2)*.3).toFixed(1)+'px)';
+    });
+    b.addEventListener('mouseleave',()=>{b.style.transform='';});
+  });
+}
+
+// Hero parallax fade on scroll
+const heroInner=document.querySelector('.hero-inner');
+if(heroInner&&!reduceMotion){
+  window.addEventListener('scroll',()=>{
+    const y=window.scrollY;
+    if(y<900){
+      heroInner.style.transform='translateY('+(y*.16).toFixed(1)+'px)';
+      heroInner.style.opacity=Math.max(1-y/850,0);
+    }
+  },{passive:true});
+}
+
+// Terminal typewriter on the hero platform line
+const tw=document.querySelector('.h-platform');
+if(tw&&!reduceMotion){
+  const fullText=tw.textContent;
+  tw.textContent='';
+  tw.style.opacity='1';
+  tw.style.animation='none';
+  const caret=document.createElement('span');
+  caret.className='type-caret';
+  caret.textContent='▌';
+  tw.appendChild(caret);
+  let ti=0;
+  setTimeout(function typeStep(){
+    if(ti<fullText.length){
+      tw.insertBefore(document.createTextNode(fullText[ti++]),caret);
+      setTimeout(typeStep,24);
+    }else{
+      setTimeout(()=>caret.remove(),2600);
+    }
+  },650);
+}
+
+// Staggered card reveal
+document.querySelectorAll('.feat-grid .feat-card,.pr-grid .pr-card').forEach((c,i)=>{
+  c.classList.add('reveal');
+  c.style.transitionDelay=((i%6)*.08)+'s';
+  obs.observe(c);
+});
 
 // MOBILE MENU
 const burger=document.getElementById('nav-burger');
