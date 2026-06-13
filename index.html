@@ -728,6 +728,55 @@ nav.scrolled{background:rgba(2,2,8,.94);box-shadow:0 8px 30px rgba(0,0,0,.55);}
 .h-stock{animation:stockGlow 4.5s ease-in-out infinite;}
 @keyframes stockGlow{0%,100%{text-shadow:0 0 40px rgba(0,200,255,.4),0 0 80px rgba(0,200,255,.15);}50%{text-shadow:0 0 55px rgba(0,200,255,.65),0 0 110px rgba(0,200,255,.28);}}
 
+/* ═══ ROUND 2 - VISIBLE UPGRADES ═══ */
+@keyframes gradShift{0%{background-position:0% center;}100%{background-position:300% center;}}
+
+/* Hero STOCK - animated gradient fill */
+.h-stock{color:transparent;-webkit-text-stroke:0;background:none;animation:none;text-shadow:none;filter:drop-shadow(0 0 26px rgba(0,200,255,.35));}
+.h-stock .gw{color:transparent;-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#FFE000,#00C8FF,#FF2D8A,#FFE000);background-size:300% auto;-webkit-background-clip:text;background-clip:text;animation:gradShift 7s linear infinite;}
+
+/* Section title accent line - animated gradient */
+.s-title span{background:linear-gradient(90deg,#FFE000,#00C8FF,#FF2D8A,#FFE000);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;animation:gradShift 9s linear infinite;filter:drop-shadow(0 0 14px rgba(0,200,255,.3));}
+
+/* Download title outline word - gradient */
+.dl-title em{background:linear-gradient(90deg,#00C8FF,#FF2D8A,#00C8FF);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:0;animation:gradShift 7s linear infinite;filter:drop-shadow(0 0 20px rgba(0,200,255,.25));}
+
+/* Aurora drift - hero glows now move */
+.hglow-y{background:radial-gradient(circle,rgba(0,200,255,.16) 0%,transparent 65%);animation:aur1 16s ease-in-out infinite alternate;}
+.hglow-c{background:radial-gradient(circle,rgba(255,45,138,.13) 0%,transparent 65%);animation:aur2 20s ease-in-out infinite alternate;}
+.hglow-b{background:radial-gradient(circle,rgba(0,136,255,.1) 0%,transparent 65%);animation:aur3 18s ease-in-out infinite alternate;}
+@keyframes aur1{to{transform:translate(-90px,70px) scale(1.25);}}
+@keyframes aur2{to{transform:translate(80px,-60px) scale(1.2);}}
+@keyframes aur3{to{transform:translate(-70px,-50px) scale(1.35);}}
+
+/* Market ticker tape */
+#ticker{position:fixed;top:64px;left:0;right:0;z-index:997;height:30px;background:rgba(3,3,10,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,200,255,.14);overflow:hidden;}
+#ticker::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,2,8,.9),transparent 8%,transparent 92%,rgba(2,2,8,.9));pointer-events:none;}
+.tk-track{display:flex;align-items:center;gap:42px;height:100%;width:max-content;padding:0 21px;animation:tkScroll 45s linear infinite;}
+#ticker:hover .tk-track{animation-play-state:paused;}
+@keyframes tkScroll{to{transform:translateX(-50%);}}
+.tk-item{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--muted2);white-space:nowrap;}
+.tk-item b{color:#fff;font-weight:500;letter-spacing:1px;}
+.tk-up{color:var(--green);text-shadow:0 0 6px rgba(57,255,20,.35);}
+.tk-dn{color:#ff6060;}
+.tk-pulse{color:#FFE000;}
+.tk-pulse::before{content:'';width:5px;height:5px;border-radius:50%;background:#FFE000;box-shadow:0 0 8px rgba(255,224,0,.8);animation:pls 2s infinite;flex-shrink:0;}
+section{scroll-margin-top:96px;}
+
+/* Primary CTAs - breathing glow */
+.btn-yellow,.nav-cta{animation:btnPulse 3.2s ease-in-out infinite;}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 18px rgba(0,200,255,.35);}50%{box-shadow:0 0 34px rgba(0,200,255,.6);}}
+
+/* Feature cards - icon pop + title highlight */
+.feat-icon{filter:drop-shadow(0 0 10px rgba(0,200,255,.3));transition:transform .3s,filter .3s;}
+.feat-card:hover .feat-icon{transform:scale(1.1);filter:drop-shadow(0 0 18px rgba(0,200,255,.6));}
+.feat-title{transition:color .3s;}
+.feat-card:hover .feat-title{color:#FFE000;}
+
+/* Ambient corner glows for flat sections */
+#features::after{content:'';position:absolute;top:-120px;right:-120px;width:560px;height:560px;background:radial-gradient(circle,rgba(255,45,138,.05),transparent 65%);pointer-events:none;}
+#prices::after{content:'';position:absolute;bottom:-120px;left:-120px;width:560px;height:560px;background:radial-gradient(circle,rgba(0,200,255,.05),transparent 65%);pointer-events:none;}
+
 /* Mobile overflow fix - pr-cards forced page wider than viewport */
 @media(max-width:900px){
   .pr-card,.pr-card-info,.pr-src{min-width:0;}
@@ -794,6 +843,30 @@ nav.scrolled{background:rgba(2,2,8,.94);box-shadow:0 8px 30px rgba(0,0,0,.55);}
   <a href="#shows">Shows</a>
   <a href="#prices">Prices</a>
   <a href="#download" class="mm-cta">Get The App</a>
+</div>
+
+<!-- MARKET TICKER -->
+<div id="ticker" aria-hidden="true">
+  <div class="tk-track">
+    <span class="tk-item tk-pulse">LIVE MARKET PULSE</span>
+    <span class="tk-item">CHARIZARD EX SAR <b>£340</b> <span class="tk-up">▲ 4.2%</span></span>
+    <span class="tk-item">UMBREON VMAX ALT <b>£890</b> <span class="tk-up">▲ 1.8%</span></span>
+    <span class="tk-item">MEWTWO EX SAR <b>£95</b> <span class="tk-dn">▼ 0.9%</span></span>
+    <span class="tk-item">PRISMATIC EVOLUTIONS ETB <span class="tk-up">▲ 3.1%</span></span>
+    <span class="tk-item">LUGIA V ALT <b>£68</b> <span class="tk-up">▲ 2.4%</span></span>
+    <span class="tk-item">GENGAR VMAX ALT <b>£145</b> <span class="tk-up">▲ 6.1%</span></span>
+    <span class="tk-item">SURGING SPARKS ETB <span class="tk-up">▲ 0.8%</span></span>
+    <span class="tk-item">RAYQUAZA VMAX ALT <b>£420</b> <span class="tk-dn">▼ 1.4%</span></span>
+    <span class="tk-item tk-pulse">LIVE MARKET PULSE</span>
+    <span class="tk-item">CHARIZARD EX SAR <b>£340</b> <span class="tk-up">▲ 4.2%</span></span>
+    <span class="tk-item">UMBREON VMAX ALT <b>£890</b> <span class="tk-up">▲ 1.8%</span></span>
+    <span class="tk-item">MEWTWO EX SAR <b>£95</b> <span class="tk-dn">▼ 0.9%</span></span>
+    <span class="tk-item">PRISMATIC EVOLUTIONS ETB <span class="tk-up">▲ 3.1%</span></span>
+    <span class="tk-item">LUGIA V ALT <b>£68</b> <span class="tk-up">▲ 2.4%</span></span>
+    <span class="tk-item">GENGAR VMAX ALT <b>£145</b> <span class="tk-up">▲ 6.1%</span></span>
+    <span class="tk-item">SURGING SPARKS ETB <span class="tk-up">▲ 0.8%</span></span>
+    <span class="tk-item">RAYQUAZA VMAX ALT <b>£420</b> <span class="tk-dn">▼ 1.4%</span></span>
+  </div>
 </div>
 
 <!-- HERO -->
