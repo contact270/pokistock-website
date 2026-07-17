@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640" width="512" height="640">
+  <defs>
+    <linearGradient id="lvRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF9CC8"/>
+      <stop offset=".45" stop-color="#FF2D8A"/>
+      <stop offset="1" stop-color="#B00055"/>
+    </linearGradient>
+    <linearGradient id="lvFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1F0A1A"/>
+      <stop offset=".5" stop-color="#12060F"/>
+      <stop offset="1" stop-color="#080308"/>
+    </linearGradient>
+    <linearGradient id="lvNum" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFC2DE"/>
+      <stop offset=".5" stop-color="#FF2D8A"/>
+      <stop offset="1" stop-color="#C4006A"/>
+    </linearGradient>
+    <filter id="lvGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="lvGlowSm" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="lvGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#FF2D8A" stroke-opacity=".07" stroke-width="1"/>
+    </pattern>
+    <g id="lvLeaf">
+      <path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/>
+    </g>
+  </defs>
+
+  <!-- outer neon glow -->
+  <path d="M256 34 L458 100 L458 330 L410 456 L256 586 L102 456 L54 330 L54 100 Z"
+        fill="none" stroke="#FF2D8A" stroke-width="3" opacity=".9" filter="url(#lvGlow)"/>
+  <!-- rim -->
+  <path d="M256 34 L458 100 L458 330 L410 456 L256 586 L102 456 L54 330 L54 100 Z" fill="url(#lvRim)"/>
+  <!-- face -->
+  <path d="M256 58 L438 118 L438 324 L396 436 L256 556 L116 436 L74 324 L74 118 Z" fill="url(#lvFace)"/>
+  <path d="M256 58 L438 118 L438 324 L396 436 L256 556 L116 436 L74 324 L74 118 Z" fill="url(#lvGrid)"/>
+  <!-- inner hairline -->
+  <path d="M256 70 L426 127 L426 320 L387 426 L256 540 L125 426 L86 320 L86 127 Z"
+        fill="none" stroke="#FF7DB8" stroke-opacity=".45" stroke-width="1.5"/>
+  <!-- corner rivets -->
+  <g fill="#FFC2DE">
+    <circle cx="98" cy="130" r="4"/><circle cx="414" cy="130" r="4"/>
+    <circle cx="128" cy="418" r="4"/><circle cx="384" cy="418" r="4"/>
+  </g>
+
+  <!-- header -->
+  <text x="256" y="112" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="17" letter-spacing="7" fill="#FF9CC8" font-weight="700">POKISTOCK</text>
+  <path d="M150 128 H362" stroke="#FF2D8A" stroke-opacity=".5" stroke-width="1"/>
+  <text x="256" y="152" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="12" letter-spacing="4" fill="#A8628A">ACHIEVEMENT · 02</text>
+
+  <!-- emblem: big 6 + laurels -->
+  <g filter="url(#lvGlowSm)">
+    <text x="256" y="308" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+          font-size="130" font-weight="900" fill="url(#lvNum)">6</text>
+  </g>
+  <text x="256" y="336" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="16" letter-spacing="8" fill="#FFC2DE" font-weight="700">MONTHS</text>
+
+  <!-- laurel branches -->
+  <g fill="#FF2D8A" opacity=".95" filter="url(#lvGlowSm)">
+    <use href="#lvLeaf" transform="translate(166 310) rotate(-100) scale(1.05)"/>
+    <use href="#lvLeaf" transform="translate(158 282) rotate(-75) scale(1.0)"/>
+    <use href="#lvLeaf" transform="translate(156 252) rotate(-50) scale(.95)"/>
+    <use href="#lvLeaf" transform="translate(162 224) rotate(-25) scale(.9)"/>
+    <use href="#lvLeaf" transform="translate(176 200) rotate(0) scale(.85)"/>
+    <use href="#lvLeaf" transform="translate(346 310) rotate(-80) scale(-1.05,1.05)"/>
+    <use href="#lvLeaf" transform="translate(354 282) rotate(-105) scale(-1,1)"/>
+    <use href="#lvLeaf" transform="translate(356 252) rotate(-130) scale(-.95,.95)"/>
+    <use href="#lvLeaf" transform="translate(350 224) rotate(-155) scale(-.9,.9)"/>
+    <use href="#lvLeaf" transform="translate(336 200) rotate(-180) scale(-.85,.85)"/>
+  </g>
+
+  <!-- name plate -->
+  <path d="M110 356 L402 356 L388 404 L124 404 Z" fill="#0E0309" stroke="url(#lvRim)" stroke-width="2"/>
+  <text x="256" y="390" text-anchor="middle" font-family="Arial, 'Arial Narrow', sans-serif"
+        font-size="32" font-weight="900" letter-spacing="4" fill="#FFFFFF">LOYAL VENDOR</text>
+
+  <!-- footer -->
+  <text x="256" y="446" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="3" fill="#FF9CC8">6 MONTHS OF SERVICE</text>
+  <g filter="url(#lvGlowSm)">
+    <path d="M226 486 L256 470 L286 486 L256 502 Z" fill="none" stroke="#FF2D8A" stroke-width="2"/>
+    <circle cx="256" cy="486" r="5" fill="#FFC2DE"/>
+  </g>
+
+  <!-- glass shine -->
+  <path d="M120 70 L240 70 L120 320 Z" fill="#FFFFFF" opacity=".05"/>
+  <path d="M258 62 L300 62 L150 380 L120 380 Z" fill="#FFFFFF" opacity=".04"/>
+</svg>
