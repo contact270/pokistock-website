@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 660" width="512" height="660">
+  <defs>
+    <linearGradient id="rim" x1="0" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#FFF8D0"/><stop offset=".3" stop-color="#FFE668"/>
+      <stop offset=".62" stop-color="#FFD700"/><stop offset="1" stop-color="#B88800"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B88800"/><stop offset="1" stop-color="#4A3500"/>
+    </linearGradient>
+    <radialGradient id="face" cx=".5" cy=".24" r="1">
+      <stop offset="0" stop-color="#2A2008"/><stop offset=".55" stop-color="#171003"/><stop offset="1" stop-color="#0B0801"/>
+    </radialGradient>
+    <linearGradient id="medal" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0" stop-color="#FFF8D0"/><stop offset=".5" stop-color="#FFD700"/><stop offset="1" stop-color="#B88800"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE668"/><stop offset=".5" stop-color="#FFD700"/><stop offset="1" stop-color="#B88800"/>
+    </linearGradient>
+    <linearGradient id="spec" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="15" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSm" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="iconShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000000" flood-opacity=".65"/>
+    </filter>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#FFD700" stroke-opacity=".06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <g stroke="#FFD700" stroke-opacity=".2" stroke-width="3">
+    <path d="M256 300 L256 14"/><path d="M256 300 L112 30"/><path d="M256 300 L400 30"/>
+    <path d="M256 300 L36 150"/><path d="M256 300 L476 150"/></g>
+
+  <!-- 3D: ground shadow + neon pool -->
+  <ellipse cx="256" cy="620" rx="180" ry="22" fill="#000000" opacity=".9" filter="url(#soft)"/>
+  <ellipse cx="256" cy="616" rx="130" ry="14" fill="#FFD700" opacity=".38" filter="url(#soft)"/>
+
+  <!-- back neon aura -->
+  <path d="M256 30 L458 96 L458 326 L410 452 L256 582 L102 452 L54 326 L54 96 Z"
+        fill="none" stroke="#FFD700" stroke-width="3" opacity=".85" filter="url(#glow)"/>
+
+  <!-- 3D: extruded side wall -->
+  <path d="M256 48 L458 114 L458 344 L410 470 L256 600 L102 470 L54 344 L54 114 Z" fill="url(#side)"/>
+
+  <!-- bevelled rim -->
+  <path d="M256 30 L458 96 L458 326 L410 452 L256 582 L102 452 L54 326 L54 96 Z" fill="url(#rim)"/>
+  <path d="M256 38 L450 102 L450 322 L404 444 L256 570 L108 444 L62 322 L62 102 Z"
+        fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="1.6"/>
+
+  <!-- face -->
+  <path d="M256 56 L436 116 L436 318 L394 430 L256 548 L118 430 L76 318 L76 116 Z" fill="url(#face)"/>
+  <path d="M256 56 L436 116 L436 318 L394 430 L256 548 L118 430 L76 318 L76 116 Z" fill="url(#grid)"/>
+  <path d="M256 66 L426 123 L426 314 L387 420 L256 534 L125 420 L86 314 L86 123 Z"
+        fill="none" stroke="#FFE668" stroke-opacity=".35" stroke-width="1.4"/>
+  <!-- dome light -->
+  <path d="M256 56 L436 116 L436 200 Q256 260 76 200 L76 116 Z" fill="url(#spec)"/>
+
+  <!-- rivets -->
+  <g fill="#FFF8D0">
+    <circle cx="100" cy="128" r="4"/><circle cx="412" cy="128" r="4"/>
+    <circle cx="130" cy="414" r="4"/><circle cx="382" cy="414" r="4"/>
+  </g>
+
+  <!-- header -->
+  <text x="256" y="108" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="16" letter-spacing="7" fill="#FFE9A0" font-weight="700">POKISTOCK</text>
+  <path d="M158 122 H354" stroke="#FFD700" stroke-opacity=".55" stroke-width="1"/>
+  <text x="256" y="145" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="3.5" fill="#C8A860">ULTIMATE RANK · GOLD TIER</text>
+
+  <g fill="#FFD700" opacity=".95" filter="url(#glowSm)">
+    <g transform="translate(150 320) rotate(-100) scale(1.05)"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+    <g transform="translate(142 288) rotate(-75)"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+    <g transform="translate(140 254) rotate(-50) scale(.95)"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+    <g transform="translate(146 222) rotate(-25) scale(.9)"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+    <g transform="translate(362 320) rotate(-80) scale(-1.05,1.05)"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+    <g transform="translate(370 288) rotate(-105) scale(-1,1)"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+    <g transform="translate(372 254) rotate(-130) scale(-.95,.95)"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+    <g transform="translate(368 222) rotate(-155) scale(-.9,.9)"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+  </g>
+
+  <!-- medallion -->
+  <circle cx="256" cy="252" r="95" fill="#0B0801" filter="url(#iconShadow)"/>
+  <circle cx="256" cy="252" r="95" fill="none" stroke="url(#medal)" stroke-width="8"/>
+  <circle cx="256" cy="252" r="84" fill="none" stroke="#FFE668" stroke-opacity=".3" stroke-width="1.5"/>
+  <path d="M170 214 A95 95 0 0 1 342 214" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(0 -4)"/>
+  <g transform="translate(256 252)" filter="url(#iconShadow)"><g filter="url(#glowSm)">
+    <path d="M-34 -46 H34 V-8 Q34 20 0 24 Q-34 20 -34 -8 Z" fill="#4A3500" stroke="#FFE668" stroke-width="8" stroke-linejoin="round"/>
+    <g fill="none" stroke="#FFD700" stroke-width="7">
+      <path d="M-34 -38 Q-62 -36 -58 -12 Q-54 6 -32 6"/>
+      <path d="M34 -38 Q62 -36 58 -12 Q54 6 32 6"/>
+    </g>
+    <path d="M-8 24 H8 L12 42 H-12 Z" fill="#FFE668"/>
+    <rect x="-24" y="42" width="48" height="12" rx="4" fill="#FFE668"/>
+    <g transform="translate(0 -14) scale(1.5)"><path d="M0 -11 L3.2 -3.4 L11 -3.4 L4.8 1.6 L7 9 L0 4.4 L-7 9 L-4.8 1.6 L-11 -3.4 L-3.2 -3.4 Z" fill="#FFE668"/></g></g></g>
+
+  <g fill="url(#medal)" filter="url(#glowSm)">
+    <g transform="translate(196 356) scale(.85)"><path d="M0 -11 L3.2 -3.4 L11 -3.4 L4.8 1.6 L7 9 L0 4.4 L-7 9 L-4.8 1.6 L-11 -3.4 L-3.2 -3.4 Z"/></g>
+    <g transform="translate(256 362) scale(1.2)"><path d="M0 -11 L3.2 -3.4 L11 -3.4 L4.8 1.6 L7 9 L0 4.4 L-7 9 L-4.8 1.6 L-11 -3.4 L-3.2 -3.4 Z"/></g>
+    <g transform="translate(316 356) scale(.85)"><path d="M0 -11 L3.2 -3.4 L11 -3.4 L4.8 1.6 L7 9 L0 4.4 L-7 9 L-4.8 1.6 L-11 -3.4 L-3.2 -3.4 Z"/></g>
+  </g>
+
+  <!-- name plate with bevel -->
+  <path d="M130 384 L382 384 L370 432 L142 432 Z"
+        fill="url(#plate)" stroke="url(#rim)" stroke-width="2.5"/>
+  <path d="M136 387 H376" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="1.5"/>
+  <text x="256" y="418" text-anchor="middle" font-family="Arial, 'Arial Narrow', sans-serif"
+        font-size="19" font-weight="900" letter-spacing="2" fill="#2A1D00">POKISTOCK LEGEND</text>
+
+  <!-- subtitle -->
+  <text x="256" y="462" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="2.5" fill="#FFE9A0">THE TOP TIER</text>
+  <text x="256" y="488" text-anchor="middle" font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif"
+        font-size="15" letter-spacing="6" fill="#C8A860">レジェンド</text>
+
+  <!-- bottom sigil -->
+  <g filter="url(#glowSm)">
+    <path d="M228 518 L256 502 L284 518 L256 534 Z" fill="none" stroke="#FFD700" stroke-width="2"/>
+    <circle cx="256" cy="518" r="4.5" fill="#FFF8D0"/>
+  </g>
+
+  <!-- glass streaks -->
+  <path d="M118 68 L238 68 L118 316 Z" fill="#FFFFFF" opacity=".05"/>
+  <path d="M256 60 L298 60 L148 376 L118 376 Z" fill="#FFFFFF" opacity=".04"/>
+</svg>

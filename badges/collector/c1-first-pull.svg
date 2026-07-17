@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 660" width="512" height="660">
+  <defs>
+    <linearGradient id="rim" x1="0" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#B8F1FF"/><stop offset=".3" stop-color="#5FDFFF"/>
+      <stop offset=".62" stop-color="#00C8FF"/><stop offset="1" stop-color="#0077B8"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0077B8"/><stop offset="1" stop-color="#023950"/>
+    </linearGradient>
+    <radialGradient id="face" cx=".5" cy=".24" r="1">
+      <stop offset="0" stop-color="#0E2238"/><stop offset=".55" stop-color="#071322"/><stop offset="1" stop-color="#030A14"/>
+    </radialGradient>
+    <linearGradient id="medal" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0" stop-color="#B8F1FF"/><stop offset=".5" stop-color="#00C8FF"/><stop offset="1" stop-color="#0077B8"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#10141F"/><stop offset="1" stop-color="#04060C"/>
+    </linearGradient>
+    <linearGradient id="spec" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="15" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSm" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="iconShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000000" flood-opacity=".65"/>
+    </filter>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#00C8FF" stroke-opacity=".06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  
+
+  <!-- 3D: ground shadow + neon pool -->
+  <ellipse cx="256" cy="620" rx="180" ry="22" fill="#000000" opacity=".9" filter="url(#soft)"/>
+  <ellipse cx="256" cy="616" rx="130" ry="14" fill="#00C8FF" opacity=".38" filter="url(#soft)"/>
+
+  <!-- back neon aura -->
+  <path d="M256 30 L458 96 L458 326 L410 452 L256 582 L102 452 L54 326 L54 96 Z"
+        fill="none" stroke="#00C8FF" stroke-width="3" opacity=".85" filter="url(#glow)"/>
+
+  <!-- 3D: extruded side wall -->
+  <path d="M256 48 L458 114 L458 344 L410 470 L256 600 L102 470 L54 344 L54 114 Z" fill="url(#side)"/>
+
+  <!-- bevelled rim -->
+  <path d="M256 30 L458 96 L458 326 L410 452 L256 582 L102 452 L54 326 L54 96 Z" fill="url(#rim)"/>
+  <path d="M256 38 L450 102 L450 322 L404 444 L256 570 L108 444 L62 322 L62 102 Z"
+        fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="1.6"/>
+
+  <!-- face -->
+  <path d="M256 56 L436 116 L436 318 L394 430 L256 548 L118 430 L76 318 L76 116 Z" fill="url(#face)"/>
+  <path d="M256 56 L436 116 L436 318 L394 430 L256 548 L118 430 L76 318 L76 116 Z" fill="url(#grid)"/>
+  <path d="M256 66 L426 123 L426 314 L387 420 L256 534 L125 420 L86 314 L86 123 Z"
+        fill="none" stroke="#5FDFFF" stroke-opacity=".35" stroke-width="1.4"/>
+  <!-- dome light -->
+  <path d="M256 56 L436 116 L436 200 Q256 260 76 200 L76 116 Z" fill="url(#spec)"/>
+
+  <!-- rivets -->
+  <g fill="#B8F1FF">
+    <circle cx="100" cy="128" r="4"/><circle cx="412" cy="128" r="4"/>
+    <circle cx="130" cy="414" r="4"/><circle cx="382" cy="414" r="4"/>
+  </g>
+
+  <!-- header -->
+  <text x="256" y="108" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="16" letter-spacing="7" fill="#9FEEFF" font-weight="700">POKISTOCK</text>
+  <path d="M158 122 H354" stroke="#00C8FF" stroke-opacity=".55" stroke-width="1"/>
+  <text x="256" y="145" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="3.5" fill="#5E86A8">COLLECTOR · PURCHASE</text>
+
+  
+
+  <!-- medallion -->
+  <circle cx="256" cy="252" r="95" fill="#030A14" filter="url(#iconShadow)"/>
+  <circle cx="256" cy="252" r="95" fill="none" stroke="url(#medal)" stroke-width="8"/>
+  <circle cx="256" cy="252" r="84" fill="none" stroke="#5FDFFF" stroke-opacity=".3" stroke-width="1.5"/>
+  <path d="M170 214 A95 95 0 0 1 342 214" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(0 -4)"/>
+  <g transform="translate(256 252)" filter="url(#iconShadow)"><g filter="url(#glowSm)">
+    <g transform="rotate(-6)">
+      <rect x="-38" y="-52" width="76" height="104" rx="9" fill="#023950" stroke="#5FDFFF" stroke-width="8"/>
+      <rect x="-26" y="-40" width="52" height="38" rx="5" fill="#0077B8" fill-opacity=".65"/>
+      <g stroke="#00C8FF" stroke-width="6" stroke-linecap="round">
+        <path d="M-24 14 H24"/><path d="M-24 30 H10"/>
+      </g>
+    </g>
+    <g transform="translate(46 -44) scale(1.3)"><path d="M0 -11 L3.2 -3.4 L11 -3.4 L4.8 1.6 L7 9 L0 4.4 L-7 9 L-4.8 1.6 L-11 -3.4 L-3.2 -3.4 Z" fill="#5FDFFF"/></g>
+    <g transform="translate(58 -18) scale(.7)"><path d="M0 -11 L3.2 -3.4 L11 -3.4 L4.8 1.6 L7 9 L0 4.4 L-7 9 L-4.8 1.6 L-11 -3.4 L-3.2 -3.4 Z" fill="#00C8FF"/></g></g></g>
+
+  
+
+  <!-- name plate with bevel -->
+  <path d="M130 384 L382 384 L370 432 L142 432 Z"
+        fill="url(#plate)" stroke="url(#rim)" stroke-width="2.5"/>
+  <path d="M136 387 H376" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="1.5"/>
+  <text x="256" y="416" text-anchor="middle" font-family="Arial, 'Arial Narrow', sans-serif"
+        font-size="30" font-weight="900" letter-spacing="2" fill="#FFFFFF">FIRST PULL</text>
+
+  <!-- subtitle -->
+  <text x="256" y="462" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="2.5" fill="#9FEEFF">YOUR FIRST PURCHASE</text>
+  <text x="256" y="488" text-anchor="middle" font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif"
+        font-size="15" letter-spacing="6" fill="#5E86A8">ファーストプル</text>
+
+  <!-- bottom sigil -->
+  <g filter="url(#glowSm)">
+    <path d="M228 518 L256 502 L284 518 L256 534 Z" fill="none" stroke="#00C8FF" stroke-width="2"/>
+    <circle cx="256" cy="518" r="4.5" fill="#B8F1FF"/>
+  </g>
+
+  <!-- glass streaks -->
+  <path d="M118 68 L238 68 L118 316 Z" fill="#FFFFFF" opacity=".05"/>
+  <path d="M256 60 L298 60 L148 376 L118 376 Z" fill="#FFFFFF" opacity=".04"/>
+</svg>

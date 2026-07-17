@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 660" width="512" height="660">
+  <defs>
+    <linearGradient id="rim" x1="0" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#FFD6E9"/><stop offset=".3" stop-color="#FF7DB8"/>
+      <stop offset=".62" stop-color="#FF2D8A"/><stop offset="1" stop-color="#B00055"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B00055"/><stop offset="1" stop-color="#4A0224"/>
+    </linearGradient>
+    <radialGradient id="face" cx=".5" cy=".24" r="1">
+      <stop offset="0" stop-color="#2A0E1F"/><stop offset=".55" stop-color="#180810"/><stop offset="1" stop-color="#0A0308"/>
+    </radialGradient>
+    <linearGradient id="medal" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0" stop-color="#FFD6E9"/><stop offset=".5" stop-color="#FF2D8A"/><stop offset="1" stop-color="#B00055"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#10141F"/><stop offset="1" stop-color="#04060C"/>
+    </linearGradient>
+    <linearGradient id="spec" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="15" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSm" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="iconShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000000" flood-opacity=".65"/>
+    </filter>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#FF2D8A" stroke-opacity=".06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  
+
+  <!-- 3D: ground shadow + neon pool -->
+  <ellipse cx="256" cy="620" rx="180" ry="22" fill="#000000" opacity=".9" filter="url(#soft)"/>
+  <ellipse cx="256" cy="616" rx="130" ry="14" fill="#FF2D8A" opacity=".38" filter="url(#soft)"/>
+
+  <!-- back neon aura -->
+  <path d="M256 30 L458 96 L458 326 L410 452 L256 582 L102 452 L54 326 L54 96 Z"
+        fill="none" stroke="#FF2D8A" stroke-width="3" opacity=".85" filter="url(#glow)"/>
+
+  <!-- 3D: extruded side wall -->
+  <path d="M256 48 L458 114 L458 344 L410 470 L256 600 L102 470 L54 344 L54 114 Z" fill="url(#side)"/>
+
+  <!-- bevelled rim -->
+  <path d="M256 30 L458 96 L458 326 L410 452 L256 582 L102 452 L54 326 L54 96 Z" fill="url(#rim)"/>
+  <path d="M256 38 L450 102 L450 322 L404 444 L256 570 L108 444 L62 322 L62 102 Z"
+        fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="1.6"/>
+
+  <!-- face -->
+  <path d="M256 56 L436 116 L436 318 L394 430 L256 548 L118 430 L76 318 L76 116 Z" fill="url(#face)"/>
+  <path d="M256 56 L436 116 L436 318 L394 430 L256 548 L118 430 L76 318 L76 116 Z" fill="url(#grid)"/>
+  <path d="M256 66 L426 123 L426 314 L387 420 L256 534 L125 420 L86 314 L86 123 Z"
+        fill="none" stroke="#FF7DB8" stroke-opacity=".35" stroke-width="1.4"/>
+  <!-- dome light -->
+  <path d="M256 56 L436 116 L436 200 Q256 260 76 200 L76 116 Z" fill="url(#spec)"/>
+
+  <!-- rivets -->
+  <g fill="#FFD6E9">
+    <circle cx="100" cy="128" r="4"/><circle cx="412" cy="128" r="4"/>
+    <circle cx="130" cy="414" r="4"/><circle cx="382" cy="414" r="4"/>
+  </g>
+
+  <!-- header -->
+  <text x="256" y="108" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="16" letter-spacing="7" fill="#FFC2DE" font-weight="700">POKISTOCK</text>
+  <path d="M158 122 H354" stroke="#FF2D8A" stroke-opacity=".55" stroke-width="1"/>
+  <text x="256" y="145" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="3.5" fill="#A8628A">VENDOR · ACHIEVEMENT 05</text>
+
+  
+
+  <!-- medallion -->
+  <circle cx="256" cy="252" r="95" fill="#0A0308" filter="url(#iconShadow)"/>
+  <circle cx="256" cy="252" r="95" fill="none" stroke="url(#medal)" stroke-width="8"/>
+  <circle cx="256" cy="252" r="84" fill="none" stroke="#FF7DB8" stroke-opacity=".3" stroke-width="1.5"/>
+  <path d="M170 214 A95 95 0 0 1 342 214" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(0 -4)"/>
+  <g transform="translate(256 252)" filter="url(#iconShadow)"><g filter="url(#glowSm)">
+    <path d="M-58 -8 L-58 12 L-38 12 L-30 34 L-16 34 L-24 12 L14 30 L14 -28 L-38 -8 Z" fill="#4A0224" stroke="#FF7DB8" stroke-width="8" stroke-linejoin="round"/>
+    <g stroke="#FF2D8A" stroke-width="7" fill="none" stroke-linecap="round">
+      <path d="M30 -16 Q42 0 30 16"/>
+      <path d="M46 -28 Q64 0 46 28"/>
+    </g>
+</g></g>
+
+  
+
+  <!-- name plate with bevel -->
+  <path d="M130 384 L382 384 L370 432 L142 432 Z"
+        fill="url(#plate)" stroke="url(#rim)" stroke-width="2.5"/>
+  <path d="M136 387 H376" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="1.5"/>
+  <text x="256" y="417" text-anchor="middle" font-family="Arial, 'Arial Narrow', sans-serif"
+        font-size="24" font-weight="900" letter-spacing="2" fill="#FFFFFF">SHOW PROMOTER</text>
+
+  <!-- subtitle -->
+  <text x="256" y="462" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="2.5" fill="#FFC2DE">PROMOTE · ATTEND A SHOW</text>
+  
+
+  <!-- bottom sigil -->
+  <g filter="url(#glowSm)">
+    <path d="M228 500 L256 484 L284 500 L256 516 Z" fill="none" stroke="#FF2D8A" stroke-width="2"/>
+    <circle cx="256" cy="500" r="4.5" fill="#FFD6E9"/>
+  </g>
+
+  <!-- glass streaks -->
+  <path d="M118 68 L238 68 L118 316 Z" fill="#FFFFFF" opacity=".05"/>
+  <path d="M256 60 L298 60 L148 376 L118 376 Z" fill="#FFFFFF" opacity=".04"/>
+</svg>
