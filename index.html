@@ -1152,7 +1152,7 @@ section{scroll-margin-top:96px;}
       <div class="up-ring up-ring2"></div>
       <div class="up-ring up-ring3"></div>
       <div class="up-cube">
-        <div class="up-face">V2</div><div class="up-face">⚡</div><div class="up-face">PS</div><div class="up-face">★</div><div class="up-face">V2</div><div class="up-face">PS</div>
+        <div class="up-face"></div><div class="up-face"></div><div class="up-face"></div><div class="up-face"></div><div class="up-face"></div><div class="up-face"></div>
       </div>
       <div class="up-p" style="left:16%;top:28%;background:var(--yellow);box-shadow:0 0 8px var(--yellow);animation-delay:0s"></div>
       <div class="up-p" style="right:18%;top:20%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation-delay:1.2s"></div>
@@ -3003,6 +3003,16 @@ if(finePointer&&!reduceMotion&&heroSec){
   });
   heroSec.addEventListener('mouseleave',()=>{
     if(heroGrid)heroGrid.style.transform='';
+  });
+}
+
+// V2 cube - POKISTOCK cyber logo on all six faces (reuses the embedded logo, no extra weight)
+const cubeLogo=document.querySelector('.hc-art img');
+if(cubeLogo){
+  document.querySelectorAll('.up-face').forEach(f=>{
+    f.style.backgroundImage='linear-gradient(135deg,rgba(0,200,255,.16),rgba(255,45,138,.12)),url("'+cubeLogo.src+'")';
+    f.style.backgroundSize='cover,cover';
+    f.style.backgroundPosition='center,center';
   });
 }
 
