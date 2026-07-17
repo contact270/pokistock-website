@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640" width="512" height="640">
+  <defs>
+    <linearGradient id="evRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF6C2"/>
+      <stop offset=".35" stop-color="#FFD700"/>
+      <stop offset=".7" stop-color="#E8A800"/>
+      <stop offset="1" stop-color="#8A6200"/>
+    </linearGradient>
+    <linearGradient id="evFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#241A05"/>
+      <stop offset=".5" stop-color="#171003"/>
+      <stop offset="1" stop-color="#0B0801"/>
+    </linearGradient>
+    <linearGradient id="evGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF6C2"/>
+      <stop offset=".5" stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#C89000"/>
+    </linearGradient>
+    <linearGradient id="evPlate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE668"/>
+      <stop offset=".5" stop-color="#FFC800"/>
+      <stop offset="1" stop-color="#D09A00"/>
+    </linearGradient>
+    <filter id="evGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="evGlowSm" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="evGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#FFD700" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+    <g id="evLeaf"><path d="M0 0 Q10 -14 24 -10 Q16 4 0 0 Z"/></g>
+    <path id="evStar" d="M0 -11 L3.2 -3.4 L11 -3.4 L4.8 1.6 L7 9 L0 4.4 L-7 9 L-4.8 1.6 L-11 -3.4 L-3.2 -3.4 Z"/>
+  </defs>
+
+  <!-- radiant rays -->
+  <g stroke="#FFD700" stroke-opacity=".22" stroke-width="3">
+    <path d="M256 310 L256 20"/><path d="M256 310 L120 40"/><path d="M256 310 L392 40"/>
+    <path d="M256 310 L40 160"/><path d="M256 310 L472 160"/>
+  </g>
+
+  <!-- outer neon glow -->
+  <path d="M256 34 L458 100 L458 330 L410 456 L256 586 L102 456 L54 330 L54 100 Z"
+        fill="none" stroke="#FFD700" stroke-width="4" filter="url(#evGlow)"/>
+  <!-- double rim -->
+  <path d="M256 34 L458 100 L458 330 L410 456 L256 586 L102 456 L54 330 L54 100 Z" fill="url(#evRim)"/>
+  <path d="M256 50 L446 112 L446 327 L402 444 L256 568 L110 444 L66 327 L66 112 Z"
+        fill="none" stroke="#FFF6C2" stroke-width="2" stroke-opacity=".8"/>
+  <!-- face -->
+  <path d="M256 62 L436 122 L436 322 L394 434 L256 552 L118 434 L76 322 L76 122 Z" fill="url(#evFace)"/>
+  <path d="M256 62 L436 122 L436 322 L394 434 L256 552 L118 434 L76 322 L76 122 Z" fill="url(#evGrid)"/>
+  <path d="M256 74 L424 131 L424 318 L385 424 L256 536 L127 424 L88 318 L88 131 Z"
+        fill="none" stroke="#FFD700" stroke-opacity=".5" stroke-width="1.5"/>
+  <!-- corner rivets -->
+  <g fill="#FFF6C2">
+    <circle cx="100" cy="134" r="4.5"/><circle cx="412" cy="134" r="4.5"/>
+    <circle cx="130" cy="416" r="4.5"/><circle cx="382" cy="416" r="4.5"/>
+  </g>
+
+  <!-- header -->
+  <text x="256" y="114" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="17" letter-spacing="7" fill="url(#evGold)" font-weight="700">POKISTOCK</text>
+  <path d="M150 130 H362" stroke="#FFD700" stroke-opacity=".6" stroke-width="1"/>
+  <text x="256" y="154" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="12" letter-spacing="4" fill="#C8A860">HIGHEST HONOUR · GOLD TIER</text>
+
+  <!-- crown emblem -->
+  <g filter="url(#evGlowSm)">
+    <path d="M176 268 L188 200 L226 246 L256 184 L286 246 L324 200 L336 268 Z" fill="url(#evGold)"/>
+    <path d="M176 278 H336 V296 H176 Z" fill="url(#evGold)"/>
+    <circle cx="188" cy="196" r="7" fill="#FFF6C2"/>
+    <circle cx="256" cy="178" r="8" fill="#FFF6C2"/>
+    <circle cx="324" cy="196" r="7" fill="#FFF6C2"/>
+  </g>
+  <g fill="#5A3E00">
+    <circle cx="216" cy="287" r="4"/><circle cx="256" cy="287" r="4"/><circle cx="296" cy="287" r="4"/>
+  </g>
+
+  <!-- laurel wreath -->
+  <g fill="#FFD700" opacity=".95" filter="url(#evGlowSm)">
+    <use href="#evLeaf" transform="translate(150 322) rotate(-100) scale(1.1)"/>
+    <use href="#evLeaf" transform="translate(142 290) rotate(-75) scale(1.05)"/>
+    <use href="#evLeaf" transform="translate(140 256) rotate(-50) scale(1.0)"/>
+    <use href="#evLeaf" transform="translate(146 224) rotate(-25) scale(.95)"/>
+    <use href="#evLeaf" transform="translate(160 196) rotate(0) scale(.9)"/>
+    <use href="#evLeaf" transform="translate(362 322) rotate(-80) scale(-1.1,1.1)"/>
+    <use href="#evLeaf" transform="translate(370 290) rotate(-105) scale(-1.05,1.05)"/>
+    <use href="#evLeaf" transform="translate(372 256) rotate(-130) scale(-1,1)"/>
+    <use href="#evLeaf" transform="translate(366 224) rotate(-155) scale(-.95,.95)"/>
+    <use href="#evLeaf" transform="translate(352 196) rotate(-180) scale(-.9,.9)"/>
+  </g>
+
+  <!-- star row -->
+  <g fill="url(#evGold)" filter="url(#evGlowSm)">
+    <use href="#evStar" transform="translate(206 322) scale(.9)"/>
+    <use href="#evStar" transform="translate(256 328) scale(1.25)"/>
+    <use href="#evStar" transform="translate(306 322) scale(.9)"/>
+  </g>
+
+  <!-- name plate: solid gold -->
+  <path d="M104 358 L408 358 L394 410 L118 410 Z" fill="url(#evPlate)" stroke="#FFF6C2" stroke-width="2"/>
+  <text x="256" y="386" text-anchor="middle" font-family="Arial, 'Arial Narrow', sans-serif"
+        font-size="30" font-weight="900" letter-spacing="4" fill="#2A1D00">ELITE VENDOR</text>
+  <text x="256" y="404" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="10" letter-spacing="6" fill="#5A3E00" font-weight="700">POKISTOCK</text>
+
+  <!-- footer -->
+  <text x="256" y="448" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="3" fill="#E8C868">EXCLUSIVE · INVITATION ONLY</text>
+  <g filter="url(#evGlowSm)">
+    <path d="M224 488 L256 470 L288 488 L256 506 Z" fill="none" stroke="#FFD700" stroke-width="2.5"/>
+    <use href="#evStar" transform="translate(256 488) scale(.6)" fill="#FFF6C2"/>
+  </g>
+
+  <!-- glass shine -->
+  <path d="M120 74 L250 74 L120 330 Z" fill="#FFFFFF" opacity=".07"/>
+  <path d="M268 64 L312 64 L152 388 L120 388 Z" fill="#FFFFFF" opacity=".05"/>
+</svg>

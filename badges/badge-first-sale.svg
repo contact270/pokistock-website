@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640" width="512" height="640">
+  <defs>
+    <linearGradient id="fsRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7FE7FF"/>
+      <stop offset=".45" stop-color="#00C8FF"/>
+      <stop offset="1" stop-color="#0066CC"/>
+    </linearGradient>
+    <linearGradient id="fsFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0D1428"/>
+      <stop offset=".5" stop-color="#070C1A"/>
+      <stop offset="1" stop-color="#04060F"/>
+    </linearGradient>
+    <linearGradient id="fsCoin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9FEEFF"/>
+      <stop offset=".5" stop-color="#00C8FF"/>
+      <stop offset="1" stop-color="#0077DD"/>
+    </linearGradient>
+    <filter id="fsGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="fsGlowSm" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="fsGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#00C8FF" stroke-opacity=".07" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- outer neon glow -->
+  <path d="M256 34 L458 100 L458 330 L410 456 L256 586 L102 456 L54 330 L54 100 Z"
+        fill="none" stroke="#00C8FF" stroke-width="3" opacity=".9" filter="url(#fsGlow)"/>
+  <!-- rim -->
+  <path d="M256 34 L458 100 L458 330 L410 456 L256 586 L102 456 L54 330 L54 100 Z" fill="url(#fsRim)"/>
+  <!-- face -->
+  <path d="M256 58 L438 118 L438 324 L396 436 L256 556 L116 436 L74 324 L74 118 Z" fill="url(#fsFace)"/>
+  <path d="M256 58 L438 118 L438 324 L396 436 L256 556 L116 436 L74 324 L74 118 Z" fill="url(#fsGrid)"/>
+  <!-- inner hairline -->
+  <path d="M256 70 L426 127 L426 320 L387 426 L256 540 L125 426 L86 320 L86 127 Z"
+        fill="none" stroke="#66DFFF" stroke-opacity=".45" stroke-width="1.5"/>
+  <!-- corner rivets -->
+  <g fill="#9FEEFF">
+    <circle cx="98" cy="130" r="4"/><circle cx="414" cy="130" r="4"/>
+    <circle cx="128" cy="418" r="4"/><circle cx="384" cy="418" r="4"/>
+  </g>
+
+  <!-- header -->
+  <text x="256" y="112" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="17" letter-spacing="7" fill="#7FE7FF" font-weight="700">POKISTOCK</text>
+  <path d="M150 128 H362" stroke="#00C8FF" stroke-opacity=".5" stroke-width="1"/>
+  <text x="256" y="152" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="12" letter-spacing="4" fill="#5E86A8">ACHIEVEMENT · 01</text>
+
+  <!-- emblem: hex coin + lightning -->
+  <g filter="url(#fsGlowSm)">
+    <path d="M256 176 L318 212 L318 284 L256 320 L194 284 L194 212 Z"
+          fill="none" stroke="url(#fsCoin)" stroke-width="6"/>
+  </g>
+  <path d="M256 190 L306 219 L306 277 L256 306 L206 277 L206 219 Z" fill="#061224" stroke="#00C8FF" stroke-opacity=".35"/>
+  <text x="256" y="272" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="64" font-weight="900" fill="url(#fsCoin)">£</text>
+  <!-- spark bolts -->
+  <g fill="#9FEEFF" filter="url(#fsGlowSm)">
+    <path d="M156 200 L138 238 L152 238 L142 268 L172 226 L156 226 L166 200 Z"/>
+    <path d="M356 200 L338 238 L352 238 L342 268 L372 226 L356 226 L366 200 Z"/>
+  </g>
+  <!-- motion ticks -->
+  <g stroke="#00C8FF" stroke-opacity=".5" stroke-width="2">
+    <path d="M170 300 H196"/><path d="M316 300 H342"/><path d="M180 316 H200"/><path d="M312 316 H332"/>
+  </g>
+
+  <!-- name plate -->
+  <path d="M120 356 L392 356 L378 404 L134 404 Z" fill="#020810" stroke="url(#fsRim)" stroke-width="2"/>
+  <text x="256" y="390" text-anchor="middle" font-family="Arial, 'Arial Narrow', sans-serif"
+        font-size="34" font-weight="900" letter-spacing="6" fill="#FFFFFF">FIRST SALE</text>
+
+  <!-- footer -->
+  <text x="256" y="446" text-anchor="middle" font-family="'JetBrains Mono','Courier New',monospace"
+        font-size="11" letter-spacing="3" fill="#7FE7FF">VERIFIED VENDOR MILESTONE</text>
+  <g filter="url(#fsGlowSm)">
+    <path d="M226 486 L256 470 L286 486 L256 502 Z" fill="none" stroke="#00C8FF" stroke-width="2"/>
+    <circle cx="256" cy="486" r="5" fill="#9FEEFF"/>
+  </g>
+
+  <!-- glass shine -->
+  <path d="M120 70 L240 70 L120 320 Z" fill="#FFFFFF" opacity=".05"/>
+  <path d="M258 62 L300 62 L150 380 L120 380 Z" fill="#FFFFFF" opacity=".04"/>
+</svg>
