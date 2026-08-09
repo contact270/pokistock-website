@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Support | POKISTOCK</title>
+<meta name="theme-color" content="#00C8FF"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --yellow:#00C8FF;--yellow2:#0099DD;--cyan:#FF2D8A;--cyan2:#E0006A;
+  --green:#39FF14;--blue:#0088FF;
+  --void:#020208;--dark1:#05050F;--dark2:#070712;--dark3:#0A0A18;
+  --text:#F0EEF8;--muted2:#6B6888;
+  --font-ui:'Rajdhani',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--text);font-family:var(--font-ui);overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);pointer-events:none;z-index:9000;}
+::selection{background:rgba(0,200,255,.3);color:#fff;}
+::-webkit-scrollbar{width:2px;}
+::-webkit-scrollbar-track{background:var(--void);}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--yellow),var(--cyan));}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(2,2,8,.94);backdrop-filter:blur(8px);box-shadow:0 8px 30px rgba(0,0,0,.55);}
+nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--yellow),var(--cyan),var(--yellow),transparent);opacity:.45;}
+.nav-logo{font-family:var(--font-mono);font-size:15px;font-weight:700;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px;}
+.nl-p{color:var(--yellow);}.nl-s{color:var(--cyan);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:9px;color:var(--muted2);text-decoration:none;letter-spacing:3px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--yellow);}
+.nav-cta{font-family:var(--font-mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--void);background:linear-gradient(90deg,#FFC200,#FFE000);padding:8px 20px;text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);box-shadow:0 0 20px rgba(0,200,255,.4);font-weight:700;}
+
+.page-glow{position:fixed;top:-15%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(0,200,255,.08) 0%,transparent 65%);pointer-events:none;}
+.page-glow2{position:fixed;bottom:-15%;left:-10%;width:520px;height:520px;background:radial-gradient(circle,rgba(255,45,138,.06) 0%,transparent 65%);pointer-events:none;}
+
+.legal-wrap{max-width:860px;margin:0 auto;padding:132px 26px 90px;position:relative;z-index:1;}
+.jp-accent{font-family:var(--font-mono);font-size:10px;color:rgba(255,45,138,.7);letter-spacing:3px;display:block;margin-bottom:10px;}
+.eyebrow{font-family:var(--font-mono);font-size:9px;color:var(--yellow);letter-spacing:5px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;text-shadow:0 0 10px rgba(0,200,255,.5);}
+.eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--yellow));}
+h1{font-family:var(--font-ui);font-size:clamp(36px,6vw,58px);font-weight:700;line-height:.95;color:#fff;letter-spacing:-1px;margin-bottom:10px;}
+h1 span{background:linear-gradient(90deg,#FFE000,#00C8FF,#FF2D8A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.updated{font-family:var(--font-mono);font-size:10px;color:var(--muted2);letter-spacing:2px;margin-bottom:38px;}
+.rule{height:1px;background:linear-gradient(90deg,var(--yellow),var(--cyan),transparent);opacity:.4;margin-bottom:38px;}
+h2{font-family:var(--font-ui);font-size:20px;font-weight:700;color:#fff;letter-spacing:.5px;margin:34px 0 12px;display:flex;align-items:center;gap:10px;}
+h2::before{content:'//';font-family:var(--font-mono);font-size:12px;color:var(--cyan);}
+p{font-size:15px;font-weight:300;line-height:1.9;color:rgba(240,238,248,.68);margin-bottom:12px;}
+p strong,li strong{color:#FFE000;font-weight:600;}
+ul{list-style:none;margin:4px 0 14px;}
+li{font-size:15px;font-weight:300;line-height:1.85;color:rgba(240,238,248,.68);padding:3px 0 3px 22px;position:relative;}
+li::before{content:'→';position:absolute;left:0;color:var(--yellow);}
+a.mail{color:var(--yellow);text-decoration:none;border-bottom:1px solid rgba(0,200,255,.35);transition:all .2s;}
+a.mail:hover{color:#fff;border-color:var(--yellow);text-shadow:0 0 10px rgba(0,200,255,.6);}
+.contact-box{margin-top:38px;background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.2);padding:20px 24px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));}
+.contact-box .cb-t{font-family:var(--font-mono);font-size:9px;color:var(--yellow);letter-spacing:3px;margin-bottom:8px;}
+
+footer{background:var(--dark3);padding:28px 48px;border-top:1px solid rgba(0,200,255,.12);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;position:relative;z-index:1;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--yellow),var(--cyan),transparent);opacity:.3;}
+.foot-logo{font-family:var(--font-mono);font-size:14px;font-weight:700;letter-spacing:4px;color:#fff;}
+.foot-logo .fp{color:var(--cyan);}.foot-logo .fs{color:var(--yellow);}
+.foot-links{display:flex;gap:20px;list-style:none;flex-wrap:wrap;}
+.foot-links a{font-family:var(--font-mono);font-size:8px;color:var(--muted2);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
+.foot-links a:hover{color:var(--yellow);}
+.foot-copy{font-family:var(--font-mono);font-size:8px;color:var(--muted2);letter-spacing:2px;}
+
+@media(max-width:900px){
+  nav{padding:0 16px;}
+  .nav-links{display:none;}
+  .legal-wrap{padding:110px 18px 60px;}
+  footer{padding:24px 18px;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="page-glow"></div><div class="page-glow2"></div>
+
+<nav>
+  <a href="/" class="nav-logo"><span class="nl-p">POKI</span><span class="nl-s">STOCK</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/support" class="active">Support</a></li>
+  </ul>
+  <a href="/#download" class="nav-cta">Get The App</a>
+</nav>
+
+<main class="legal-wrap">
+  <span class="jp-accent">サポート</span>
+  <div class="eyebrow">// HELP CENTRE</div>
+  <h1>POKISTOCK <span>Support.</span></h1>
+  <p class="updated">NEED A HAND? WE'RE HERE TO HELP.</p>
+  <div class="rule"></div>
+
+  <h2>Get in touch</h2>
+  <p>The quickest way to reach us is by email: <a class="mail" href="mailto:contact@pokestockapp.uk">contact@pokestockapp.uk</a></p>
+  <p>We aim to respond as quickly as we can, usually within a couple of days.</p>
+
+  <h2>Common questions</h2>
+  <ul>
+    <li><strong>How do I reset my password?</strong><br/>On the login screen, tap "Forgot Password", enter your email, and you'll receive a reset code. Enter the code in the app to set a new password.</li>
+    <li><strong>How do I become a vendor?</strong><br/>Tap to apply as a vendor in the app. Applications are reviewed before approval so collectors know every vendor is verified.</li>
+    <li><strong>How do I delete my account?</strong><br/>You can request account deletion by emailing <a class="mail" href="mailto:contact@pokestockapp.uk">contact@pokestockapp.uk</a>, or through the account settings in the app.</li>
+    <li><strong>When is the marketplace launching?</strong><br/>The full in-app marketplace is coming soon. Follow us on Instagram <a class="mail" href="https://instagram.com/pokistockappuk" target="_blank">@pokistock</a> for updates.</li>
+  </ul>
+
+  <h2>Follow us</h2>
+  <p>Instagram: <a class="mail" href="https://instagram.com/pokistockappuk" target="_blank">@pokistock</a></p>
+
+  <div class="contact-box">
+    <div class="cb-t">POKISTOCK LTD</div>
+    <p style="margin:0">Made for Collectors, Not Against Them.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-logo"><span class="fp">POKI</span><span class="fs">STOCK</span>™</div>
+  <ul class="foot-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/privacy">Privacy Policy</a></li>
+    <li><a href="/support">Support</a></li>
+    <li><a href="https://instagram.com/pokistockappuk" target="_blank">Instagram</a></li>
+    <li><a href="https://www.ukcardshows.co.uk" target="_blank">UK Card Shows</a></li>
+  </ul>
+  <div class="foot-copy">© 2026 POKISTOCK™ · UK's Premier TCG Platform · ポキストック</div>
+</footer>
+</body>
+</html>
