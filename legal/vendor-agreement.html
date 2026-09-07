@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vendor Agreement | POKISTOCK</title>
+<meta name="theme-color" content="#00C8FF"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --yellow:#00C8FF;--yellow2:#0099DD;--cyan:#FF2D8A;--cyan2:#E0006A;
+  --green:#39FF14;--blue:#0088FF;
+  --void:#020208;--dark1:#05050F;--dark2:#070712;--dark3:#0A0A18;
+  --text:#F0EEF8;--muted2:#6B6888;
+  --font-ui:'Rajdhani',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--text);font-family:var(--font-ui);overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);pointer-events:none;z-index:9000;}
+::selection{background:rgba(0,200,255,.3);color:#fff;}
+::-webkit-scrollbar{width:2px;}
+::-webkit-scrollbar-track{background:var(--void);}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--yellow),var(--cyan));}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(2,2,8,.94);backdrop-filter:blur(8px);box-shadow:0 8px 30px rgba(0,0,0,.55);}
+nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--yellow),var(--cyan),var(--yellow),transparent);opacity:.45;}
+.nav-logo{font-family:var(--font-mono);font-size:15px;font-weight:700;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px;}
+.nl-p{color:var(--yellow);}.nl-s{color:var(--cyan);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:9px;color:var(--muted2);text-decoration:none;letter-spacing:3px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--yellow);}
+.nav-cta{font-family:var(--font-mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--void);background:linear-gradient(90deg,#FFC200,#FFE000);padding:8px 20px;text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);box-shadow:0 0 20px rgba(0,200,255,.4);font-weight:700;}
+
+.page-glow{position:fixed;top:-15%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(0,200,255,.08) 0%,transparent 65%);pointer-events:none;}
+.page-glow2{position:fixed;bottom:-15%;left:-10%;width:520px;height:520px;background:radial-gradient(circle,rgba(255,45,138,.06) 0%,transparent 65%);pointer-events:none;}
+
+.legal-wrap{max-width:860px;margin:0 auto;padding:132px 26px 90px;position:relative;z-index:1;}
+.jp-accent{font-family:var(--font-mono);font-size:10px;color:rgba(255,45,138,.7);letter-spacing:3px;display:block;margin-bottom:10px;}
+.eyebrow{font-family:var(--font-mono);font-size:9px;color:var(--yellow);letter-spacing:5px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;text-shadow:0 0 10px rgba(0,200,255,.5);}
+.eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--yellow));}
+h1{font-family:var(--font-ui);font-size:clamp(36px,6vw,58px);font-weight:700;line-height:.95;color:#fff;letter-spacing:-1px;margin-bottom:10px;}
+h1 span{background:linear-gradient(90deg,#FFE000,#00C8FF,#FF2D8A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.updated{font-family:var(--font-mono);font-size:10px;color:var(--muted2);letter-spacing:2px;margin-bottom:38px;}
+.rule{height:1px;background:linear-gradient(90deg,var(--yellow),var(--cyan),transparent);opacity:.4;margin-bottom:38px;}
+h2{font-family:var(--font-ui);font-size:20px;font-weight:700;color:#fff;letter-spacing:.5px;margin:34px 0 12px;display:flex;align-items:center;gap:10px;}
+h2::before{content:'//';font-family:var(--font-mono);font-size:12px;color:var(--cyan);}
+p{font-size:15px;font-weight:300;line-height:1.9;color:rgba(240,238,248,.68);margin-bottom:12px;}
+p strong,li strong{color:#FFE000;font-weight:600;}
+ul{list-style:none;margin:4px 0 14px;}
+li{font-size:15px;font-weight:300;line-height:1.85;color:rgba(240,238,248,.68);padding:3px 0 3px 22px;position:relative;}
+li::before{content:'→';position:absolute;left:0;color:var(--yellow);}
+a.mail{color:var(--yellow);text-decoration:none;border-bottom:1px solid rgba(0,200,255,.35);transition:all .2s;}
+a.mail:hover{color:#fff;border-color:var(--yellow);text-shadow:0 0 10px rgba(0,200,255,.6);}
+.contact-box{margin-top:38px;background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.2);padding:20px 24px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));}
+.contact-box .cb-t{font-family:var(--font-mono);font-size:9px;color:var(--yellow);letter-spacing:3px;margin-bottom:8px;}
+
+footer{background:var(--dark3);padding:28px 48px;border-top:1px solid rgba(0,200,255,.12);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;position:relative;z-index:1;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--yellow),var(--cyan),transparent);opacity:.3;}
+.foot-logo{font-family:var(--font-mono);font-size:14px;font-weight:700;letter-spacing:4px;color:#fff;}
+.foot-logo .fp{color:var(--cyan);}.foot-logo .fs{color:var(--yellow);}
+.foot-links{display:flex;gap:20px;list-style:none;flex-wrap:wrap;}
+.foot-links a{font-family:var(--font-mono);font-size:8px;color:var(--muted2);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
+.foot-links a:hover{color:var(--yellow);}
+.foot-copy{font-family:var(--font-mono);font-size:8px;color:var(--muted2);letter-spacing:2px;}
+
+@media(max-width:900px){
+  nav{padding:0 16px;}
+  .nav-links{display:none;}
+  .legal-wrap{padding:110px 18px 60px;}
+  footer{padding:24px 18px;flex-direction:column;text-align:center;}
+}
+
+h3{font-family:var(--font-ui);font-size:16px;font-weight:600;color:#fff;letter-spacing:.4px;margin:22px 0 8px;}
+h3::before{content:'\203A';color:var(--cyan);margin-right:8px;}
+.sig-box{margin-top:30px;background:rgba(255,45,138,.04);border:1px solid rgba(255,45,138,.2);padding:22px 24px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));}
+.sig-box .sb-t{font-family:var(--font-mono);font-size:9px;color:var(--cyan);letter-spacing:3px;margin-bottom:10px;}
+.sig-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:14px;}
+.sig-cols .sc-h{font-family:var(--font-mono);font-size:9px;color:var(--yellow);letter-spacing:2px;margin-bottom:10px;}
+.sig-line{font-family:var(--font-mono);font-size:11px;color:rgba(240,238,248,.55);padding:7px 0;border-bottom:1px dashed rgba(107,104,136,.4);}
+@media(max-width:700px){.sig-cols{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="page-glow"></div><div class="page-glow2"></div>
+
+<nav>
+  <a href="/" class="nav-logo"><span class="nl-p">POKI</span><span class="nl-s">STOCK</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/legal/privacy-policy">Privacy</a></li>
+    <li><a href="/legal/vendor-terms">Vendor Terms</a></li>
+    <li><a href="/legal/vendor-agreement" class="active">Agreement</a></li>
+    <li><a href="/support">Support</a></li>
+  </ul>
+  <a href="/#download" class="nav-cta">Get The App</a>
+</nav>
+
+<main class="legal-wrap">
+  <span class="jp-accent">ベンダー契約</span>
+  <div class="eyebrow">// LEGAL</div>
+  <h1>Vendor <span>Agreement.</span></h1>
+  <p class="updated">A BINDING AGREEMENT FOR APPROVED POKISTOCK VENDORS</p>
+  <div class="rule"></div>
+
+  <p>A binding agreement for approved Vendors on the POKISTOCK marketplace.</p>
+  <h2>1. The parties</h2>
+  <p>This Vendor Agreement (the "Agreement") is entered into between POKISTOCK LTD, of Fleetwood, Lancashire, United Kingdom ("POKISTOCK"), and the Vendor identified in the signature section below ("Vendor"). Together, POKISTOCK and the Vendor are the "Parties".</p>
+  <h2>2. Purpose and documents</h2>
+  <p>This Agreement sets out the terms on which the Vendor is approved to list and sell goods through the POKISTOCK marketplace, app and website.</p>
+  <p>The POKISTOCK <a class="mail" href="/legal/vendor-terms">Vendor Terms &amp; Conditions</a> ("Vendor Terms") form part of this Agreement and apply to the Vendor’s participation in the marketplace. If there is any conflict between this Agreement and the Vendor Terms, this Agreement takes priority to the extent of the conflict.</p>
+  <p>By signing this Agreement and continuing to sell through POKISTOCK, the Vendor confirms that they have read and agree to be bound by both documents.</p>
+  <h2>3. Vendor verification</h2>
+  <p>The Vendor confirms that all information supplied during the application and verification process, including business details, trading history, contact information and linked storefronts or social media accounts, is accurate and complete.</p>
+  <p>POKISTOCK may carry out reasonable checks before approving a Vendor and may request further information where reasonably necessary.</p>
+  <p>Verification or approval does not constitute a guarantee, warranty or endorsement of the Vendor, its goods or its conduct. The Vendor remains responsible for the accuracy and legality of its listings and sales.</p>
+  <h2>4. Term</h2>
+  <p>This Agreement begins on the date it is signed by both Parties and continues until terminated in accordance with Section 10.</p>
+  <h2>5. Vendor obligations</h2>
+  <p>The Vendor agrees to:</p>
+  <ul>
+    <li>comply with this Agreement and the Vendor Terms at all times;</li>
+    <li>list only goods that are physically in the Vendor’s possession and available for dispatch, unless POKISTOCK has expressly agreed otherwise in writing;</li>
+    <li>provide accurate descriptions, photographs, prices and condition information;</li>
+    <li>dispatch orders promptly and in accordance with the Vendor’s stated delivery terms;</li>
+    <li>use appropriate packaging and tracked delivery where required by the Vendor Terms;</li>
+    <li>maintain an accurate returns policy and comply with all applicable consumer rights and legal obligations;</li>
+    <li>respond promptly to buyer questions, complaints and disputes raised through POKISTOCK;</li>
+    <li>keep business, contact, payout and tax information accurate and up to date;</li>
+    <li>cooperate with POKISTOCK and its payment providers in relation to refunds, chargebacks, fraud checks and disputes; and</li>
+    <li>not attempt to circumvent POKISTOCK in order to avoid commission on sales sourced through the platform.</li>
+  </ul>
+  <h2>6. POKISTOCK’s role</h2>
+  <p>POKISTOCK provides the marketplace through which Vendors can display and sell goods to buyers and facilitates payment processing through its payment provider, including Stripe Connect where applicable.</p>
+  <p>The Vendor is the seller of the goods. The contract of sale for each order is between the Vendor and the buyer. POKISTOCK does not own, sell or take title to the Vendor’s goods and is not a party to the underlying contract of sale.</p>
+  <p>POKISTOCK may facilitate payment processing, hold or release funds through its payment infrastructure, and administer marketplace disputes in accordance with the Vendor Terms. These functions do not make POKISTOCK the seller of the goods or transfer the Vendor’s legal obligations to POKISTOCK.</p>
+  <p>The Vendor remains responsible for fulfilment, delivery, returns, refunds, replacements and compliance with applicable consumer law arising from its sales.</p>
+  <h2>7. Commission and payment</h2>
+  <p>POKISTOCK’s standard marketplace commission is <strong>9% of the final sale price</strong> of each completed order, unless a different rate has been agreed with the Vendor in writing, including under the POKISTOCK Vendor Affiliate Programme.</p>
+  <p>The applicable commission will be deducted in accordance with the marketplace payment process. Any payment-processing treatment or fees will be communicated to the Vendor before the relevant rate is applied.</p>
+  <p>Payments and payouts are processed through POKISTOCK’s designated payment provider. The Vendor is responsible for maintaining accurate payout details and complying with the payment provider’s applicable terms.</p>
+  <p>POKISTOCK may change its standard commission rate on reasonable notice in accordance with the Vendor Terms. Any special or introductory commission rate will continue only for the period expressly agreed.</p>
+  <h2>8. Vendor Affiliate Programme</h2>
+  <p>Participation in the POKISTOCK Vendor Affiliate Programme is optional and subject to separate programme terms.</p>
+  <p>Where the Vendor is accepted into the programme, the Vendor may receive a reduced commission rate for an introductory period of three (3) months, or such other period as POKISTOCK confirms in writing.</p>
+  <p>The applicable affiliate commission rate and programme dates will be confirmed to the Vendor before or upon acceptance. Unless otherwise agreed in writing, the Vendor will automatically revert to the standard POKISTOCK commission rate when the introductory period ends.</p>
+  <p>Participation in the programme does not change the Vendor’s responsibility for its goods, sales, fulfilment, returns, refunds, disputes or consumer-law obligations.</p>
+  <h2>9. Intellectual property</h2>
+  <p>The Vendor retains ownership of photographs, product information and other content it uploads to POKISTOCK.</p>
+  <p>The Vendor grants POKISTOCK a non-exclusive, royalty-free licence to display, reproduce, format and use that content for operating, promoting and marketing the relevant listing and the POKISTOCK marketplace, including on POKISTOCK’s website, app and social media channels, for so long as the relevant listing or Vendor participation remains active.</p>
+  <p>The Vendor warrants that it has the rights necessary to grant this licence.</p>
+  <h2>10. Termination</h2>
+  <p>Either Party may terminate this Agreement by giving 30 days’ written notice.</p>
+  <p>POKISTOCK may suspend or terminate the Vendor’s access immediately where there is a serious or repeated breach of this Agreement or the Vendor Terms, including counterfeit goods, fraudulent conduct, prohibited pre-orders, material misrepresentation, unlawful activity or conduct that creates a material risk to buyers or POKISTOCK.</p>
+  <p>Where a breach is capable of remedy and is not serious, POKISTOCK may, at its discretion, give the Vendor a reasonable opportunity to correct the breach before termination.</p>
+  <p>Termination does not remove responsibility for orders already placed. Orders must be fulfilled, cancelled or refunded by the Vendor as required by the Vendor Terms and applicable law.</p>
+  <h2>11. Liability</h2>
+  <p>To the fullest extent permitted by law, POKISTOCK’s total aggregate liability to the Vendor arising under or in connection with this Agreement is limited to the commission fees actually paid by the Vendor to POKISTOCK during the three (3) months immediately preceding the event giving rise to the claim.</p>
+  <p>Nothing in this Agreement excludes or limits liability for fraud, or for death or personal injury caused by negligence, or any other liability that cannot lawfully be excluded or limited.</p>
+  <p>Nothing in this Agreement is intended to exclude or limit any legal rights or remedies that cannot lawfully be excluded or limited.</p>
+  <h2>12. Data protection</h2>
+  <p>Each Party will comply with applicable data protection law in relation to personal data processed under this Agreement.</p>
+  <p>Where buyer information is provided to the Vendor for order fulfilment, the Vendor must use that information only for legitimate fulfilment and related customer-service purposes, keep it secure and comply with applicable data protection requirements.</p>
+  <h2>13. Governing law and disputes</h2>
+  <p>This Agreement is governed by the laws of England and Wales.</p>
+  <p>The Parties will first attempt in good faith to resolve any dispute arising from this Agreement. If the dispute cannot be resolved, it will be subject to the jurisdiction of the courts of England and Wales.</p>
+  <h2>14. Entire agreement</h2>
+  <p>This Agreement, together with the Vendor Terms and any applicable written Affiliate Programme terms, constitutes the agreement between the Parties concerning the Vendor’s participation in the POKISTOCK marketplace and supersedes prior discussions or agreements on that subject.</p>
+  <p>If any provision is found to be invalid or unenforceable, the remaining provisions will continue in effect to the extent permitted by law.</p>
+  <div class="sig-box">
+    <div class="sb-t">SIGNATURES</div>
+    <p>By signing below, both Parties confirm that they have read, understood and agree to be bound by this Agreement.</p>
+    <div class="sig-cols">
+      <div>
+        <div class="sc-h">SIGNED FOR POKISTOCK LTD</div>
+        <div class="sig-line">Name:</div>
+        <div class="sig-line">Position:</div>
+        <div class="sig-line">Date:</div>
+      </div>
+      <div>
+        <div class="sc-h">SIGNED FOR THE VENDOR</div>
+        <div class="sig-line">Name:</div>
+        <div class="sig-line">Business name:</div>
+        <div class="sig-line">Name of signatory:</div>
+        <div class="sig-line">Date:</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-box">
+    <div class="cb-t">POKISTOCK LTD</div>
+    <p style="margin:0">Fleetwood, Lancashire, United Kingdom<br/>Email: <a class="mail" href="mailto:contact@pokestockapp.uk">contact@pokestockapp.uk</a></p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-logo"><span class="fp">POKI</span><span class="fs">STOCK</span>&trade;</div>
+  <ul class="foot-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/legal/privacy-policy">Privacy Policy</a></li>
+    <li><a href="/legal/vendor-terms">Vendor Terms</a></li>
+    <li><a href="/legal/vendor-agreement">Vendor Agreement</a></li>
+    <li><a href="/support">Support</a></li>
+    <li><a href="https://instagram.com/pokistockappuk" target="_blank">Instagram</a></li>
+    <li><a href="https://www.ukcardshows.co.uk" target="_blank">UK Card Shows</a></li>
+  </ul>
+  <div class="foot-copy">&copy; 2026 POKISTOCK&trade; &middot; UK's Premier TCG Platform &middot; ポキストック</div>
+</footer>
+</body>
+</html>
