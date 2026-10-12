@@ -1012,6 +1012,13 @@ section{scroll-margin-top:96px;}
 .dt-links{display:flex;flex-direction:column;gap:8px;}
 .dt-link{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:9px;color:var(--text);text-decoration:none;background:rgba(232,20,46,.05);border:1px solid rgba(232,20,46,.22);padding:10px 14px;transition:all .25s;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);}
 .dt-link:hover{background:rgba(232,20,46,.12);border-color:rgba(232,20,46,.55);color:#FFD37A;box-shadow:0 0 16px rgba(232,20,46,.18);}
+.dt-play-cta{display:flex;align-items:center;gap:14px;margin-top:12px;padding:16px 18px;text-decoration:none;background:linear-gradient(120deg,#B00E22,#E8142E,#B00E22);background-size:220% auto;animation:dtPlaySheen 3.2s linear infinite,dtPlayPulse 2.4s ease-in-out infinite;border-radius:2px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));position:relative;}
+.dt-play-cta::before{content:'';position:absolute;inset:0;border:1px solid rgba(255,211,122,.5);clip-path:inherit;pointer-events:none;}
+@keyframes dtPlaySheen{0%{background-position:0% center;}100%{background-position:220% center;}}
+@keyframes dtPlayPulse{0%,100%{box-shadow:0 0 22px rgba(232,20,46,.45);}50%{box-shadow:0 0 42px rgba(232,20,46,.8),0 0 70px rgba(232,20,46,.25);}}
+.dt-play-icon{font-size:26px;flex-shrink:0;filter:drop-shadow(0 0 6px rgba(255,246,232,.5));}
+.dt-play-title{font-family:var(--font-ui);font-size:15px;font-weight:700;color:#FFF6E8;letter-spacing:.3px;line-height:1.2;}
+.dt-play-sub{font-family:var(--font-mono);font-size:9px;color:#FFD9C0;letter-spacing:1px;margin-top:3px;}
 .dt-tag{font-family:var(--font-mono);font-size:9px;color:#FFD37A;letter-spacing:4px;margin-bottom:14px;text-shadow:0 0 8px rgba(255,211,122,.4);}
 .dt-name{font-family:var(--font-ui);font-size:clamp(28px,3.6vw,46px);font-weight:700;color:#fff;line-height:.98;letter-spacing:-1px;margin-bottom:20px;}
 .dt-name span{background:linear-gradient(90deg,#E8142E,#FF5A6E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;}
@@ -1412,8 +1419,14 @@ section{scroll-margin-top:96px;}
         <div class="dt-links">
           <a href="https://www.dynastytcg.com/" target="_blank" rel="noopener" class="dt-link">&#127760; Official Website</a>
           <a href="https://youtube.com/@dynastytcg?si=9-0cFYg9XyBihXdf" target="_blank" rel="noopener" class="dt-link">&#9654; YouTube Channel</a>
-          <a href="https://beta.dynastytcgonline.com/auth/login" target="_blank" rel="noopener" class="dt-link">&#127918; Play The Beta</a>
         </div>
+        <a href="https://beta.dynastytcgonline.com/auth/login" target="_blank" rel="noopener" class="dt-play-cta">
+          <div class="dt-play-icon">&#127918;</div>
+          <div>
+            <div class="dt-play-title">Learn To Play Online</div>
+            <div class="dt-play-sub">TRY DYNASTY TCG FREE IN YOUR BROWSER &rarr;</div>
+          </div>
+        </a>
       </div>
       <div class="dt-right">
         <div class="dt-tag">// INDEPENDENT TCG &middot; EST. 2021</div>
